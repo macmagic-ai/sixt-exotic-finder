@@ -7,7 +7,7 @@
     "category": "Coupe",
     "guaranteed": true,
     "price": "$657/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-gt-amg-2d-weiss-2017.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -19,7 +19,7 @@
     "category": "Convertible",
     "guaranteed": false,
     "price": "$191/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-z4-convertible-white-2023-open.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -31,7 +31,7 @@
     "category": "Gran Coupe",
     "guaranteed": false,
     "price": "$468/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-8-gran-coupe-blue-US-2024.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -43,7 +43,7 @@
     "category": "Convertible",
     "guaranteed": true,
     "price": "$900/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-sl63-amg-convertible-silver-2022.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -55,7 +55,7 @@
     "category": "Convertible",
     "guaranteed": false,
     "price": "$265/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-cle-2d-white-open-2024.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -67,7 +67,7 @@
     "category": "Convertible",
     "guaranteed": true,
     "price": "$868/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-sl63-amg-convertible-2d-red-2022-JV.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -79,7 +79,7 @@
     "category": "Coupe",
     "guaranteed": true,
     "price": "$314/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-m2-coupe-2d-blue-2023.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -91,7 +91,7 @@
     "category": "Gran Coupe",
     "guaranteed": false,
     "price": "$180/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-4-grand-coupe-black-2021.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -103,7 +103,7 @@
     "category": "Gran Coupe",
     "guaranteed": false,
     "price": "$143/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-4-series-gran-coupe-silver-2021.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -115,7 +115,7 @@
     "category": "Gran Coupe",
     "guaranteed": false,
     "price": "$229/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-4-series-gran-coupe-silver-2021.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -127,7 +127,7 @@
     "category": "Coupe",
     "guaranteed": false,
     "price": "$204/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-8-coupe-2d-blue-2023-US.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -139,7 +139,7 @@
     "category": "Convertible",
     "guaranteed": false,
     "price": "$120/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/ford-mustang-2d-convertible-red-2023.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -151,7 +151,7 @@
     "category": "Convertible",
     "guaranteed": false,
     "price": "$102/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/ford-mustang-2d-convertible-red-2023.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -163,7 +163,7 @@
     "category": "Convertible",
     "guaranteed": false,
     "price": "$76/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/ford-mustang-2d-convertible-red-2023.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -175,7 +175,7 @@
     "category": "Coupe",
     "guaranteed": false,
     "price": "$128/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-4-coupe-2d-blue-2020-JV.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   }

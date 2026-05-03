@@ -309,8 +309,9 @@ function renderList() {
           </div>
           <div class="space-y-2">
             ${stationExotics.map(e => `
-              <div class="flex items-center gap-2 text-sm py-1.5 px-3 rounded-lg bg-white/5">
+              <div class="flex items-center gap-3 text-sm py-1.5 px-3 rounded-lg bg-white/5">
                 ${e.guaranteed ? '<span class="text-pink-400 text-base" title="Guaranteed Model">🔒</span>' : '<span class="w-4"></span>'}
+                ${e.imageUrl ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="" class="w-8 h-5 object-contain opacity-80">` : ''}
                 <span class="${e.guaranteed ? 'text-pink-200 font-medium' : 'text-white/70'}">${e.model}</span>
                 <span class="text-xs text-white/30 ml-auto">${e.price || e.category}</span>
               </div>
@@ -341,7 +342,7 @@ function renderList() {
       <div class="magic-card overflow-hidden group reveal" style="transition-delay: ${delay}ms">
         <div class="car-image-bg aspect-[4/3] flex items-center justify-center relative">
           ${e.imageUrl
-            ? `<img src="https://www.sixt.com${e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
+            ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
             : `<div class="text-7xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 relative z-10">🏎️</div>`
           }
           ${e.guaranteed
