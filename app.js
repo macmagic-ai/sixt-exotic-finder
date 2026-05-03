@@ -5,8 +5,6 @@
 
 let stations = [];
 let exotics = [];
-let map = null;
-let markers = [];
 
 // Particle system
 function initParticles() {
@@ -122,8 +120,7 @@ async function init() {
 
     updateStats();
     populateFilters();
-    initMap();
-    renderList();
+    renderCars();
     setupEventListeners();
     initScrollReveal();
   } catch (e) {
@@ -227,118 +224,58 @@ function getFilteredData() {
   return { stations: filteredStations, exotics: filteredExotics };
 }
 
-function initMap() {
-  map = L.map('map', { zoomControl: false, attributionControl: false }).setView([48.5, 10], 4);
+function renderCars() {
+  const { exotics: filteredExotics } = getFilteredData();
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 19
-  }).addTo(map);
+  document.getElementById('cars-count').textContent = `(${filteredExotics.length})`;
+  const carsGrid = document.getElementById('cars-grid');
 
-  L.control.zoom({ position: 'bottomright' }).addTo(map);
-  updateMapMarkers();
-}
-
-function updateMapMarkers() {
-  markers.forEach(m => map.removeLayer(m));
-  markers = [];
-
-  const { stations: filteredStations } = getFilteredData();
-
-  filteredStations.forEach(station => {
-    const hasExotics = station.hasExotics;
-
-    const icon = L.divIcon({
-      className: 'custom-marker',
-      html: `<div class="${hasExotics ? 'marker-exotic pulse-glow' : 'marker-none'} w-4 h-4"></div>`,
-      iconSize: [16, 16],
-      iconAnchor: [8, 8]
-    });
-
-    const marker = L.marker([station.lat, station.lng], { icon }).addTo(map);
-
-    const stationExotics = exotics.filter(e => e.stationId === station.id);
-    const popupContent = `
-      <div class="min-w-[220px]">
-        <h3 class="font-bold text-lg mb-1 text-white">${station.name}</h3>
-        <p class="text-sm text-white/50 mb-3">${station.city}, ${getCountryName(station.country)}</p>
-        ${hasExotics
-          ? `<div class="space-y-1.5">
-              <p class="text-emerald-400 font-semibold text-sm">${stationExotics.length} exotic car${stationExotics.length > 1 ? 's' : ''}</p>
-              ${stationExotics.slice(0, 3).map(e =>
-                `<div class="text-sm flex items-center gap-1.5 text-white/80">
-                  ${e.guaranteed ? '<span class="text-pink-400 text-xs font-bold">[G]</span>' : ''}
-                  ${e.model}
-                </div>`
-              ).join('')}
-              ${stationExotics.length > 3 ? `<p class="text-xs text-white/30 mt-1">+${stationExotics.length - 3} more</p>` : ''}
-             </div>`
-          : '<p class="text-gray-400 text-sm">No exotic cars found</p>'
-        }
-      </div>
-    `;
-
-    marker.bindPopup(popupContent);
-    markers.push(marker);
-  });
-}
-
-function renderList() {
-  const { stations: filteredStations, exotics: filteredExotics } = getFilteredData();
-
-  // Stations grid
-  const stationsGrid = document.getElementById('stations-grid');
-  const stationsWithExotics = filteredStations.filter(s => s.hasExotics);
-  document.getElementById('stations-count').textContent = `(${stationsWithExotics.length})`;
-
-  if (stationsWithExotics.length === 0) {
-    stationsGrid.innerHTML = `
+  if (filteredExotics.length === 0) {
+    carsGrid.innerHTML = `
       <div class="col-span-full text-center py-16">
         <div class="text-4xl font-bold mb-4 opacity-30">NO RESULTS</div>
         <p class="text-white/40 text-lg">No exotic cars match your filters</p>
         <p class="text-white/20 text-sm mt-2">Try adjusting your search criteria</p>
       </div>
     `;
-  } else {
-    stationsGrid.innerHTML = stationsWithExotics.map((station, i) => {
-      const stationExotics = filteredExotics.filter(e => e.stationId === station.id);
-      const delay = i * 50;
-      return `
-        <div class="magic-card p-5 reveal" style="transition-delay: ${delay}ms">
-          <div class="flex items-start justify-between mb-3">
-            <div>
-              <h3 class="font-bold text-lg text-white">${station.name}</h3>
-              <p class="text-sm text-white/40">${station.city}, ${getCountryName(station.country)}</p>
-            </div>
-            <span class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              ${stationExotics.length} car${stationExotics.length > 1 ? 's' : ''}
-            </span>
-          </div>
-          <div class="space-y-2">
-            ${stationExotics.map(e => `
-              <div class="flex items-center gap-3 text-sm py-1.5 px-3 rounded-lg bg-white/5">
-                ${e.guaranteed ? '<span class="text-pink-400 text-xs font-bold px-1.5 py-0.5 rounded bg-pink-500/10 border border-pink-500/20">GUARANTEED</span>' : '<span class="w-4"></span>'}
-                ${e.imageUrl ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="" class="w-8 h-5 object-contain opacity-80">` : ''}
-                <span class="${e.guaranteed ? 'text-pink-200 font-medium' : 'text-white/70'}">${e.model}</span>
-                <span class="text-xs text-white/30 ml-auto">${e.price || e.category}</span>
-              </div>
-            `).join('')}
-          </div>
-          ${station.iata ? `
-            <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs">
-              <span class="text-white/30">${station.iata}</span>
-              <a href="https://www.sixt.com/car-rental/${slugifyCountry(station.country)}/${slugifyCity(station.city)}/${slugifyStation(station.name)}/"
-                 target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">Book on Sixt →</a>
-            </div>
-          ` : ''}
-        </div>
-      `;
-    }).join('');
-
-    // Trigger reveal animation
-    setTimeout(() => document.querySelectorAll('#stations-grid .reveal').forEach(el => el.classList.add('visible')), 100);
+    return;
   }
+
+  carsGrid.innerHTML = filteredExotics.map((e, i) => {
+    const delay = i * 30;
+    const station = stations.find(s => s.id === e.stationId);
+    return `
+      <div class="magic-card overflow-hidden group reveal" style="transition-delay: ${delay}ms">
+        <div class="car-image-bg aspect-[4/3] flex items-center justify-center relative">
+          ${e.imageUrl
+            ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
+            : `<div class="text-4xl font-bold opacity-10 group-hover:opacity-20 transition-opacity duration-500 relative z-10 tracking-widest">SIXT</div>`
+          }
+          ${e.guaranteed
+            ? `<div class="absolute top-3 right-3 px-3 py-1 rounded-xl bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm z-20 border border-pink-400/30">GUARANTEED</div>`
+            : ''
+          }
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        </div>
+        <div class="p-5 relative z-10">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">${e.brand}</span>
+            <span class="w-1 h-1 rounded-full bg-white/20"></span>
+            <span class="text-xs text-white/40">${e.category}</span>
+          </div>
+          <h4 class="font-bold text-white text-lg mb-2 group-hover:text-gradient transition-colors">${e.model}</h4>
+          ${e.price ? `<div class="text-sm text-amber-400 font-semibold mb-3">${e.price}</div>` : ''}
+          <div class="flex items-center gap-2 text-xs text-white/40">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            ${e.stationName}${station && station.iata ? ` (${station.iata})` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  setTimeout(() => document.querySelectorAll('#cars-grid .reveal').forEach(el => el.classList.add('visible')), 100);
+}
 
   // Cars grid
   document.getElementById('cars-count').textContent = `(${filteredExotics.length})`;
@@ -403,15 +340,13 @@ function setupEventListeners() {
     const el = document.getElementById(id);
     if (el) {
       el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', () => {
-        updateMapMarkers();
-        renderList();
+        renderCars();
       });
     }
   });
 
   document.getElementById('search-input').addEventListener('input', () => {
-    updateMapMarkers();
-    renderList();
+    renderCars();
   });
 
   // Contribute link
@@ -425,7 +360,7 @@ function showError(msg) {
   document.body.innerHTML = `
     <div class="min-h-screen flex items-center justify-center">
       <div class="text-center">
-        <div class="text-6xl mb-4">⚠️</div>
+        <div class="text-2xl font-bold mb-4 opacity-50">ERROR</div>
         <p class="text-white/50">${msg}</p>
       </div>
     </div>

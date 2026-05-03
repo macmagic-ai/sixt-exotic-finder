@@ -7,8 +7,6 @@
   <meta name="description" content="Find guaranteed exotic and supercar rentals at Sixt stations worldwide. Map + listings for car enthusiasts planning their next drive.">
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <script>
@@ -138,27 +136,6 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* Map */
-    #map { height: 100%; min-height: 550px; border-radius: 20px; z-index: 1; }
-    .leaflet-popup-content-wrapper {
-      background: rgba(19,19,31,0.95) !important; backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1); border-radius: 16px !important; color: white;
-    }
-    .leaflet-popup-tip { background: rgba(19,19,31,0.95) !important; }
-
-    /* Marker styles */
-    .marker-exotic { background: linear-gradient(135deg, #10b981, #059669); border: 3px solid rgba(255,255,255,0.9); border-radius: 50%; box-shadow: 0 0 20px rgba(16,185,129,0.5); }
-    .marker-none { background: linear-gradient(135deg, #4b5563, #374151); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; opacity: 0.5; }
-
-    /* Tab pills */
-    .tab-pill {
-      padding: 10px 24px; border-radius: 14px; font-size: 14px; font-weight: 500;
-      cursor: pointer; transition: all 0.3s; border: 1px solid transparent;
-      background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5);
-    }
-    .tab-pill.active { background: rgba(139,92,246,0.15); color: #c084fc; border-color: rgba(139,92,246,0.3); }
-    .tab-pill:hover:not(.active) { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); }
-
     /* Filter select */
     .magic-select {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
@@ -209,8 +186,7 @@
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button id="view-map" class="tab-pill active">🗺️ Map</button>
-          <button id="view-list" class="tab-pill">📋 List</button>
+          <a href="https://github.com/macmagic-ai/sixt-exotic-finder" target="_blank" class="text-xs text-white/40 hover:text-white/70 transition-colors">GitHub</a>
         </div>
       </div>
     </div>
@@ -281,35 +257,16 @@
 
       <!-- Main Content -->
       <main class="pb-24">
-        <!-- Map View -->
-        <div id="map-view" class="h-[calc(100vh-380px)] min-h-[500px]">
-          <div class="magic-card h-full p-1">
-            <div id="map"></div>
-          </div>
-        </div>
-
-        <!-- List View -->
-        <div id="list-view" class="hidden space-y-8">
-          <!-- Stations Grid -->
-          <div>
-            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-gradient">Stations with Exotics</span>
-              <span id="stations-count" class="text-sm text-white/40 font-normal"></span>
+        <!-- Car Grid -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">
+              <span class="text-gradient">Exotic Cars</span>
+              <span id="cars-count" class="text-sm text-white/40 font-normal ml-2"></span>
             </h3>
-            <div id="stations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <!-- Injected -->
-            </div>
           </div>
-
-          <!-- Cars Grid -->
-          <div>
-            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-gradient">All Exotic Cars</span>
-              <span id="cars-count" class="text-sm text-white/40 font-normal"></span>
-            </h3>
-            <div id="cars-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <!-- Injected -->
-            </div>
+          <div id="cars-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <!-- Injected -->
           </div>
         </div>
       </main>
