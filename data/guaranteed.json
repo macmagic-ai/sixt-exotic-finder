@@ -39,7 +39,7 @@
     "brand": "Mercedes-Benz",
     "category": "Midsize Elite Sedan Automatic",
     "price": "$152/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-cla-4d-sedan-white-2026.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -50,7 +50,7 @@
     "brand": "BMW",
     "category": "Premium Elite Sedan Automatic",
     "price": "$458/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-m5-4d-sedan-grey-2025.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -61,7 +61,7 @@
     "brand": "Mercedes-Benz",
     "category": "Extraordinary Sedan Automatic",
     "price": "$474/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-s-long-sedan-4d-silver-2021-JV.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -72,7 +72,7 @@
     "brand": "BMW",
     "category": "Premium Elite Wagon Automatic",
     "price": "$486/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-m5-touring-stw-black-2026.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -83,7 +83,7 @@
     "brand": "Porsche",
     "category": "Extraordinary Sedan Automatic",
     "price": "$520/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/porsche-panamera-sedan-4d-black-2021-JV.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -94,7 +94,7 @@
     "brand": "BMW",
     "category": "Extraordinary SUV Automatic",
     "price": "$536/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/bmw-x7-m60-suv-grey-2025.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -105,7 +105,7 @@
     "brand": "Mercedes-AMG",
     "category": "Extraordinary SUV Automatic",
     "price": "$578/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-gls63-amg-suv-4d-grey-2025.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -116,7 +116,7 @@
     "brand": "Mercedes-AMG",
     "category": "Full-size Elite Coupe Automatic",
     "price": "$592/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-gt-s-coupe-2d-grey-2024.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -127,7 +127,7 @@
     "brand": "Mercedes-AMG",
     "category": "Full-size Elite Convertible Automatic",
     "price": "$696/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-sl63-amg-convertible-silver-2022.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -138,7 +138,7 @@
     "brand": "Porsche",
     "category": "Midsize Elite Coupe Automatic",
     "price": "$705/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/porsche-911-carrera-4s-coupe-2d-silver-2019-JV.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   },
@@ -149,7 +149,7 @@
     "brand": "Porsche",
     "category": "Midsize Elite Convertible Automatic",
     "price": "$744/day",
-    "imageUrl": null,
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/porsche-911-carrera-4s-convertible-2d-blue-2024.png",
     "firstSeen": "2026-05-03",
     "lastSeen": "2026-05-03"
   }
