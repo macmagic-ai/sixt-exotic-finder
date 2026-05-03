@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Mercedes-Benz AMG GT",
+    "brand": "Mercedes-Benz",
+    "category": "Coupe",
+    "guaranteed": true,
+    "price": "$657/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "NCE01",
+    "stationName": "Nice Airport",
+    "model": "BMW Z4 Roadster",
+    "brand": "BMW",
+    "category": "Convertible",
+    "guaranteed": false,
+    "price": "$191/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "NCE01",
+    "stationName": "Nice Airport",
+    "model": "BMW 8 Series Gran Coupe",
+    "brand": "BMW",
+    "category": "Gran Coupe",
+    "guaranteed": false,
+    "price": "$468/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MUC01",
+    "stationName": "Munich Airport",
+    "model": "Mercedes-Benz CLE",
+    "brand": "Mercedes-Benz",
+    "category": "Convertible",
+    "guaranteed": false,
+    "price": "$265/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "DXB01",
+    "stationName": "Dubai Int. Airport Terminal 3",
+    "model": "Mercedes-AMG SL 55 V8 BITURBO 4MATIC+",
+    "brand": "Mercedes-AMG",
+    "category": "Convertible",
+    "guaranteed": true,
+    "price": "$868/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LAX01",
+    "stationName": "Los Angeles Airport",
+    "model": "Ford Mustang Convertible",
+    "brand": "Ford",
+    "category": "Convertible",
+    "guaranteed": false,
+    "price": "$102/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MIA01",
+    "stationName": "Miami Airport",
+    "model": "Ford Mustang Convertible",
+    "brand": "Ford",
+    "category": "Convertible",
+    "guaranteed": false,
+    "price": "$76/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MIA01",
+    "stationName": "Miami Airport",
+    "model": "BMW 4 Series Coupe",
+    "brand": "BMW",
+    "category": "Coupe",
+    "guaranteed": false,
+    "price": "$128/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  }
+]

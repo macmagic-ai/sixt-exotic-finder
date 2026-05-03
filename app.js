@@ -311,7 +311,7 @@ function renderList() {
               <div class="flex items-center gap-2 text-sm py-1.5 px-3 rounded-lg bg-white/5">
                 ${e.guaranteed ? '<span class="text-pink-400 text-base" title="Guaranteed Model">🔒</span>' : '<span class="w-4"></span>'}
                 <span class="${e.guaranteed ? 'text-pink-200 font-medium' : 'text-white/70'}">${e.model}</span>
-                <span class="text-xs text-white/30 ml-auto">${e.category}</span>
+                <span class="text-xs text-white/30 ml-auto">${e.price || e.category}</span>
               </div>
             `).join('')}
           </div>
@@ -355,13 +355,13 @@ function renderList() {
             <span class="w-1 h-1 rounded-full bg-white/20"></span>
             <span class="text-xs text-white/40">${e.category}</span>
           </div>
-          <h4 class="font-bold text-white text-lg mb-3 group-hover:text-gradient transition-colors">${e.model}</h4>
+          <h4 class="font-bold text-white text-lg mb-2 group-hover:text-gradient transition-colors">${e.model}</h4>
+          ${e.price ? `<div class="text-sm text-amber-400 font-semibold mb-2">${e.price}</div>` : ''}
           <div class="flex items-center justify-between">
             <span class="text-xs text-white/40 flex items-center gap-1.5">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               ${e.stationName}
             </span>
-            ${e.sixtUrl ? `<a href="${e.sixtUrl}" target="_blank" class="text-xs text-purple-400 hover:text-purple-300 transition-colors">View →</a>` : ''}
           </div>
         </div>
       </div>

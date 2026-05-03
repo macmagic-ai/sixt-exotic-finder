@@ -11,12 +11,13 @@ const stations = require('./stations-list');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 
-// Exotic car detection
-const EXOTIC_BRANDS = [
+// Exotic car detection - checks both heading AND the actual model in subheading
+const EXOTIC_KEYWORDS = [
   'porsche', 'ferrari', 'lamborghini', 'mclaren', 'aston martin',
-  'bentley', 'rolls-royce', 'maserati', 'chevrolet corvette', 'ford mustang',
-  'dodge challenger', 'bmw m8', 'audi r8', 'mercedes-amg gt', 'mercedes g-class',
-  'tesla model s', 'tesla roadster'
+  'bentley', 'rolls-royce', 'maserati', 'corvette', 'mustang',
+  'challenger', 'hellcat', 'bmw m8', 'bmw z4', 'bmw 8 series', 'bmw 4 series',
+  'audi r8', 'audi rs', 'mercedes-amg gt', 'mercedes g-class', 'mercedes g class',
+  'amg gt', 'tesla model s', 'tesla roadster', 'camaro'
 ];
 
 const NORMAL_KEYWORDS = [
@@ -35,18 +36,26 @@ const NORMAL_KEYWORDS = [
 
 function isExotic(carName) {
   const lower = carName.toLowerCase();
-  const hasExoticBrand = EXOTIC_BRANDS.some(b => lower.includes(b.toLowerCase()));
-  if (!hasExoticBrand) return false;
+  // Must match an exotic keyword
+  const hasExotic = EXOTIC_KEYWORDS.some(k => lower.includes(k.toLowerCase()));
+  if (!hasExotic) return false;
+  // Must NOT be a normal car variant
   const isNormal = NORMAL_KEYWORDS.some(k => lower.includes(k.toLowerCase()));
   return !isNormal;
 }
 
 function extractBrand(name) {
-  const brands = ['Porsche', 'Ferrari', 'Lamborghini', 'McLaren', 'Aston Martin',
-    'Bentley', 'Rolls-Royce', 'Maserati', 'Chevrolet', 'Ford', 'BMW', 'Audi',
-    'Mercedes-Benz', 'Mercedes-AMG', 'Mercedes', 'Tesla', 'Dodge'];
-  for (const b of brands) {
-    if (name.toLowerCase().includes(b.toLowerCase())) return b;
+  const brands = [
+    ['Mercedes-Benz', 'mercedes-benz'], ['Mercedes-AMG', 'mercedes-amg'], ['Mercedes', 'mercedes'],
+    ['Porsche', 'porsche'], ['Ferrari', 'ferrari'], ['Lamborghini', 'lamborghini'],
+    ['McLaren', 'mclaren'], ['Aston Martin', 'aston martin'],
+    ['Bentley', 'bentley'], ['Rolls-Royce', 'rolls-royce'], ['Maserati', 'maserati'],
+    ['Chevrolet', 'chevrolet'], ['Ford', 'ford'], ['BMW', 'bmw'], ['Audi', 'audi'],
+    ['Tesla', 'tesla'], ['Dodge', 'dodge']
+  ];
+  const lower = name.toLowerCase();
+  for (const [brand, search] of brands) {
+    if (lower.includes(search)) return brand;
   }
   return 'Other';
 }
@@ -59,7 +68,8 @@ function extractCategory(subheading) {
 
 function isGuaranteed(heading, subheading) {
   const text = `${heading} ${subheading || ''}`.toLowerCase();
-  return text.includes('guaranteed') && !text.includes('or similar');
+  // "Guaranteed model" or "(guaranteed)" without "or similar"
+  return (text.includes('guaranteed model') || text.includes('(guaranteed)')) && !text.includes('or similar');
 }
 
 async function fetchWithTimeout(url, timeout = 15000) {

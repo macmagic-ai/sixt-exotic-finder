@@ -8,8 +8,8 @@
     "lat": 59.6519,
     "lng": 17.9186,
     "slug": "sweden/stockholm/stockholm-arlanda-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -21,8 +21,8 @@
     "lat": 43.6654,
     "lng": 7.215,
     "slug": "france/nice/nice-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 2,
     "lastChecked": "2026-05-03"
   },
   {
@@ -47,8 +47,8 @@
     "lat": 48.3538,
     "lng": 11.7861,
     "slug": "germany/munich/munich-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -86,8 +86,8 @@
     "lat": 25.2532,
     "lng": 55.3657,
     "slug": "united-arab-emirates/dubai/dubai-int-airport-terminal-3",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -203,8 +203,8 @@
     "lat": 33.9425,
     "lng": -118.4081,
     "slug": "usa/los-angeles/los-angeles-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -216,8 +216,8 @@
     "lat": 25.7959,
     "lng": -80.287,
     "slug": "usa/miami/miami-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 2,
     "lastChecked": "2026-05-03"
   },
   {
