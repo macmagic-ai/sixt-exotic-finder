@@ -36,6 +36,18 @@
     "lastSeen": "2026-05-03"
   },
   {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-AMG SL 63 Roadster",
+    "brand": "Mercedes-AMG",
+    "category": "Convertible",
+    "guaranteed": true,
+    "price": "$900/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
     "stationId": "MUC01",
     "stationName": "Munich Airport",
     "model": "Mercedes-Benz CLE",

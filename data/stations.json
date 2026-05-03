@@ -34,8 +34,8 @@
     "lat": 50.0379,
     "lng": 8.5622,
     "slug": "germany/frankfurt/frankfurt-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
