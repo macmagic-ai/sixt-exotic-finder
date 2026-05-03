@@ -182,7 +182,7 @@
           </div>
           <div>
             <h1 class="text-lg font-bold tracking-tight">Sixt <span class="text-gradient">Exotic</span> Finder</h1>
-            <p class="text-xs text-white/40">Guaranteed models + premium cars worldwide</p>
+            <p class="text-xs text-white/40">Guaranteed models only</p>
           </div>
         </div>
         <div class="flex items-center gap-2">
@@ -200,8 +200,8 @@
           Find Your Next <span class="text-gradient">Supercar</span>
         </h2>
         <p class="text-white/50 text-lg max-w-2xl mx-auto">
-          Find guaranteed-model and high-price premium rentals at Sixt stations worldwide.
-          Guaranteed model or $200+/day = premium tier.
+          Find guaranteed-model car rentals at Sixt stations worldwide.
+          Sixt promises the exact car you book — no "or similar" surprises.
         </p>
       </div>
 
@@ -214,14 +214,10 @@
           </div>
           <div class="text-center">
             <div id="stat-exotics" class="stat-value text-amber-400">-</div>
-            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">With Exotics</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">With Cars</div>
           </div>
           <div class="text-center">
             <div id="stat-cars" class="stat-value text-emerald-400">-</div>
-            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Supercars</div>
-          </div>
-          <div class="text-center">
-            <div id="stat-guaranteed" class="stat-value text-pink-400">-</div>
             <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Guaranteed</div>
           </div>
           <div class="text-center hidden md:block">
@@ -240,16 +236,7 @@
         <select id="filter-brand" class="magic-select">
           <option value="">All Brands</option>
         </select>
-        <label class="flex items-center gap-2 magic-select cursor-pointer hover:bg-white/8">
-          <input type="checkbox" id="filter-guaranteed" class="w-4 h-4 rounded accent-purple-500">
-          <span class="text-sm">Guaranteed Only</span>
-        </label>
-        <label class="flex items-center gap-2 magic-select cursor-pointer hover:bg-white/8 px-3">
-          <span class="text-sm text-white/40">Min $</span>
-          <input type="number" id="filter-price" value="200" min="0" step="10"
-            class="w-16 bg-transparent text-sm text-white outline-none text-right">
-          <span class="text-sm text-white/40">/day</span>
-        </label>
+        <span class="text-sm text-white/40">All cars shown are guaranteed models</span>
         <div class="flex-1"></div>
         <input type="text" id="search-input" placeholder="Search station or city..."
           class="magic-select w-full sm:w-64">
@@ -277,7 +264,7 @@
   <footer class="fixed bottom-0 left-0 right-0 z-50 px-4 py-3">
     <div class="max-w-7xl mx-auto">
       <div class="magic-card px-5 py-2 flex items-center justify-between text-xs text-white/40">
-        <span>Strategy: Guaranteed model OR $200+/day. Not affiliated with Sixt SE.</span>
+        <span>Guaranteed models only. Not affiliated with Sixt SE.</span>
         <div class="flex items-center gap-4">
           <a href="https://github.com/macmagic-ai/sixt-exotic-finder" target="_blank" class="hover:text-white/70 transition-colors">GitHub</a>
         </div>

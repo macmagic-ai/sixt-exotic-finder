@@ -133,15 +133,12 @@ function updateStats() {
   const stats = {
     stations: stations.length,
     withCars: stations.filter(s => s.hasExotics).length,
-    cars: exotics.length,
-    guaranteed: exotics.filter(e => e.guaranteed).length,
-    premium: exotics.filter(e => e.priceNum >= 200).length
+    cars: exotics.length
   };
 
   animateCounter(document.getElementById('stat-stations'), stats.stations);
   animateCounter(document.getElementById('stat-exotics'), stats.withCars);
   animateCounter(document.getElementById('stat-cars'), stats.cars);
-  animateCounter(document.getElementById('stat-guaranteed'), stats.guaranteed);
 
   if (stations.length > 0 && stations[0].lastChecked) {
     document.getElementById('stat-lastupdate').textContent = stations[0].lastChecked;
@@ -181,10 +178,9 @@ function getCountryName(code) {
 function getFilteredData() {
   const country = document.getElementById('filter-country').value;
   const brand = document.getElementById('filter-brand').value;
-  const guaranteedOnly = document.getElementById('filter-guaranteed').checked;
-  const minPrice = parseInt(document.getElementById('filter-price').value) || 0;
   const search = document.getElementById('search-input').value.toLowerCase();
 
+  // All cars in the dataset are guaranteed models
   let filteredExotics = exotics;
 
   if (country) {
@@ -194,17 +190,6 @@ function getFilteredData() {
 
   if (brand) {
     filteredExotics = filteredExotics.filter(e => e.brand === brand);
-  }
-
-  if (guaranteedOnly) {
-    filteredExotics = filteredExotics.filter(e => e.guaranteed);
-  }
-
-  if (minPrice > 0) {
-    filteredExotics = filteredExotics.filter(e => {
-      const priceMatch = e.price.match(/\$(\d+)/);
-      return priceMatch && parseInt(priceMatch[1]) >= minPrice;
-    });
   }
 
   if (search) {
@@ -252,10 +237,7 @@ function renderCars() {
             ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
             : `<div class="text-4xl font-bold opacity-10 group-hover:opacity-20 transition-opacity duration-500 relative z-10 tracking-widest">SIXT</div>`
           }
-          ${e.guaranteed
-            ? `<div class="absolute top-3 right-3 px-3 py-1 rounded-xl bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm z-20 border border-pink-400/30">GUARANTEED</div>`
-            : ''
-          }
+          <div class="absolute top-3 right-3 px-3 py-1 rounded-xl bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm z-20 border border-pink-400/30">GUARANTEED</div>
           <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
         <div class="p-5 relative z-10">
@@ -280,10 +262,10 @@ function renderCars() {
 
 function setupEventListeners() {
   // Filters
-  ['filter-country', 'filter-brand', 'filter-guaranteed', 'filter-price'].forEach(id => {
+  ['filter-country', 'filter-brand'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
-      el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', () => {
+      el.addEventListener('change', () => {
         renderCars();
       });
     }

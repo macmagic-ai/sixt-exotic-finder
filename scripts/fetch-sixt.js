@@ -17,8 +17,8 @@ const stations = require('./stations-list');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 
-// Price threshold for "premium" cars (in USD)
-const PREMIUM_PRICE_THRESHOLD = 150;
+// We ONLY track guaranteed models — Sixt promises the exact car
+const GUARANTEED_ONLY = true;
 
 // Default scrape date: 4 months in the future, random day
 function getDefaultScrapeDate() {
@@ -26,11 +26,6 @@ function getDefaultScrapeDate() {
   d.setMonth(d.getMonth() + 4);
   d.setDate(Math.floor(Math.random() * 28) + 1);
   return d.toISOString().split('T')[0]; // YYYY-MM-DD
-}
-
-function extractPrice(text) {
-  const match = text.match(/\$(\d+(?:\.\d+)?)\s*\/\s*day/);
-  return match ? parseInt(match[1], 10) : null;
 }
 
 function isGuaranteed(text) {
@@ -86,25 +81,20 @@ console.log('Branch ID:', branchId);
     }
     if (btn.tagName !== 'BUTTON') return;
     const text = btn.textContent.trim().replace(/\\s+/g, ' ');
+    if (!text.includes('Guaranteed model')) return;
     const priceMatch = text.match(/\\\$(\\d+(?:\\.\\d+)?)\\s*\\/\\s*day/);
-    if (!priceMatch) return;
-    const priceNum = parseInt(priceMatch[1], 10);
-    if (priceNum < ${PREMIUM_PRICE_THRESHOLD}) return;
-    const priceStr = '$' + priceMatch[1] + '/day';
-    const guaranteed = text.includes('Guaranteed model');
+    const priceStr = priceMatch ? '$' + priceMatch[1] + '/day' : 'N/A';
     const para = btn.querySelector('p');
     const category = para ? para.textContent.trim() : 'Car';
-    cars.push({ model: h4.textContent.trim(), category, price: priceStr, priceNum, guaranteed });
+    cars.push({ model: h4.textContent.trim(), category, price: priceStr, guaranteed: true });
   });
   return cars;
 })()
 `;
 }
 
-function filterPremiumCars(cars) {
-  return cars
-    .filter(c => c.priceNum && c.priceNum >= PREMIUM_PRICE_THRESHOLD)
-    .sort((a, b) => b.priceNum - a.priceNum);
+function filterGuaranteed(cars) {
+  return cars.filter(c => c.guaranteed);
 }
 
 function main() {
