@@ -3,6 +3,10 @@
  * Sixt Premium Car Finder
  * Strategy: Find guaranteed models OR high-price cars (premium indicator)
  * Uses browser DOM extraction for reliable data
+ * 
+ * IMPORTANT: Pick a random date 3-6 months in the future when scraping.
+ * Sixt shows different fleet based on dates. Future dates often reveal
+ * more premium cars that are already in their booking system.
  */
 
 const fs = require('fs');
@@ -13,6 +17,15 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 
 // Price threshold for "premium" cars (in USD)
 const PREMIUM_PRICE_THRESHOLD = 200;
+
+// Default scrape date: 4 months in the future, random day
+function getDefaultScrapeDate() {
+  const d = new Date();
+  d.setMonth(d.getMonth() + 4);
+  // Random day between 1-28 to avoid month-end issues
+  d.setDate(Math.floor(Math.random() * 28) + 1);
+  return d.toISOString().split('T')[0]; // YYYY-MM-DD
+}
 
 function extractPrice(text) {
   // Extract numeric price from "from $XXX.XX / day" text
@@ -54,7 +67,12 @@ function extractBrand(name) {
  * This is designed to be run via the browser automation
  */
 function generateScrapeScript(station) {
-  const url = `https://www.sixt.com/car-rental/${station.slug}/`;
+  const pickupDate = getDefaultScrapeDate();
+  const returnDate = new Date(new Date(pickupDate).getTime() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  
+  // Build URL with date parameters to get accurate fleet
+  const url = `https://www.sixt.com/car-rental/${station.slug}/?pickupDate=${pickupDate}T10:00&returnDate=${returnDate}T10:00`;
+  
   return `
 // Navigate to: ${url}
 // Then run:
