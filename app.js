@@ -278,64 +278,7 @@ function renderCars() {
   setTimeout(() => document.querySelectorAll('#cars-grid .reveal').forEach(el => el.classList.add('visible')), 100);
 }
 
-  // Cars grid
-  document.getElementById('cars-count').textContent = `(${filteredExotics.length})`;
-  const carsGrid = document.getElementById('cars-grid');
-
-  carsGrid.innerHTML = filteredExotics.map((e, i) => {
-    const delay = i * 30;
-    return `
-      <div class="magic-card overflow-hidden group reveal" style="transition-delay: ${delay}ms">
-        <div class="car-image-bg aspect-[4/3] flex items-center justify-center relative">
-          ${e.imageUrl
-            ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
-            : `<div class="text-4xl font-bold opacity-10 group-hover:opacity-20 transition-opacity duration-500 relative z-10 tracking-widest">SIXT</div>`
-          }
-          ${e.guaranteed
-            ? `<div class="absolute top-3 right-3 px-3 py-1 rounded-xl bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm z-20 border border-pink-400/30">GUARANTEED</div>`
-            : ''
-          }
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-        </div>
-        <div class="p-5 relative z-10">
-          <div class="flex items-center gap-2 mb-2">
-            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">${e.brand}</span>
-            <span class="w-1 h-1 rounded-full bg-white/20"></span>
-            <span class="text-xs text-white/40">${e.category}</span>
-          </div>
-          <h4 class="font-bold text-white text-lg mb-2 group-hover:text-gradient transition-colors">${e.model}</h4>
-          ${e.price ? `<div class="text-sm text-amber-400 font-semibold mb-2">${e.price}</div>` : ''}
-          <div class="flex items-center justify-between">
-            <span class="text-xs text-white/40 flex items-center gap-1.5">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              ${e.stationName}
-            </span>
-          </div>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  setTimeout(() => document.querySelectorAll('#cars-grid .reveal').forEach(el => el.classList.add('visible')), 100);
-}
-
 function setupEventListeners() {
-  // View toggle
-  document.getElementById('view-map').addEventListener('click', () => {
-    document.getElementById('map-view').classList.remove('hidden');
-    document.getElementById('list-view').classList.add('hidden');
-    document.getElementById('view-map').classList.add('active');
-    document.getElementById('view-list').classList.remove('active');
-    setTimeout(() => map.invalidateSize(), 100);
-  });
-
-  document.getElementById('view-list').addEventListener('click', () => {
-    document.getElementById('map-view').classList.add('hidden');
-    document.getElementById('list-view').classList.remove('hidden');
-    document.getElementById('view-list').classList.add('active');
-    document.getElementById('view-map').classList.remove('active');
-  });
-
   // Filters
   ['filter-country', 'filter-brand', 'filter-guaranteed', 'filter-price'].forEach(id => {
     const el = document.getElementById(id);
@@ -346,15 +289,12 @@ function setupEventListeners() {
     }
   });
 
-  document.getElementById('search-input').addEventListener('input', () => {
-    renderCars();
-  });
-
-  // Contribute link
-  document.getElementById('contribute-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('Coming soon: Submit verified exotic car sightings at Sixt stations!\n\nFor now, open a PR on GitHub with your findings.');
-  });
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      renderCars();
+    });
+  }
 }
 
 function showError(msg) {
