@@ -132,13 +132,14 @@ async function init() {
 function updateStats() {
   const stats = {
     stations: stations.length,
-    exotics: stations.filter(s => s.hasExotics).length,
+    withCars: stations.filter(s => s.hasExotics).length,
     cars: exotics.length,
-    guaranteed: exotics.filter(e => e.guaranteed).length
+    guaranteed: exotics.filter(e => e.guaranteed).length,
+    premium: exotics.filter(e => e.priceNum >= 200).length
   };
 
   animateCounter(document.getElementById('stat-stations'), stats.stations);
-  animateCounter(document.getElementById('stat-exotics'), stats.exotics);
+  animateCounter(document.getElementById('stat-exotics'), stats.withCars);
   animateCounter(document.getElementById('stat-cars'), stats.cars);
   animateCounter(document.getElementById('stat-guaranteed'), stats.guaranteed);
 

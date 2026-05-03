@@ -1,16 +1,8 @@
 #!/usr/bin/env node
 /**
- * Sixt Exotic Car Fetcher
- * 
- * Scrapes Sixt station pages for guaranteed exotic/supercar models.
- * Uses page-data JSON from station pages to extract fleet information.
- * 
- * Research notes (see docs/api-research.md):
- * - Sixt station pages: /car-rental/{country}/{city}/{station-slug}/
- * - Page-data JSON: /car-rental/.../page-data-{hash}.json
- * - Fleet slider in page-data shows category cars ("or similar")
- * - Guaranteed models may appear in fleet guide or offerlist API
- * - Offerlist funnel: /betafunnel/#/offerlist?ctyp={type}&uci={stationId}&uda={date}&rda={date}
+ * Sixt Premium Car Finder
+ * Strategy: Find guaranteed models OR high-price cars (premium indicator)
+ * Uses browser DOM extraction for reliable data
  */
 
 const fs = require('fs');
@@ -18,199 +10,153 @@ const path = require('path');
 const stations = require('./stations-list');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
-const EXOTIC_BRANDS = [
-  'porsche', 'ferrari', 'lamborghini', 'mclaren', 'aston martin',
-  'bentley', 'rolls-royce', 'maserati', 'corvette', 'mustang gt',
-  'dodge challenger', 'hellcat', 'bmw m8', 'audi r8', 'mercedes-amg gt',
-  'mercedes g-class', 'tesla model s', 'ford mustang', 'chevrolet corvette'
-];
 
-// Keywords that indicate a non-exotic car to filter out
-const NORMAL_CAR_KEYWORDS = [
-  'vw ', 'volkswagen', 'toyota', 'nissan', 'hyundai', 'kia', 'skoda',
-  'seat', 'peugeot', 'citroen', 'renault', 'fiat', 'opel', 'vauxhall',
-  'ford fiesta', 'ford focus', 'honda', 'mazda', 'subaru', 'suzuki',
-  'bmw 1', 'bmw 2', 'bmw 3', 'bmw 5', 'bmw x1', 'bmw x3', 'bmw x5',
-  'mercedes a-', 'mercedes b-', 'mercedes c-', 'mercedes e-', 'mercedes gla',
-  'mercedes glc', 'mercedes gle', 'audi a1', 'audi a3', 'audi a4', 'audi a5',
-  'audi a6', 'audi q2', 'audi q3', 'audi q5', 'audi q7',
-  'golf', 'polo', 'passat', 'tiguan', 't-roc', 'yaris', 'corolla', 'camry',
-  'versa', 'sentra', 'altima', 'elantra', 'i30', 'octavia', 'fabia',
-  'leon', 'ibiza', '208', '308', 'c3', 'c4', 'clio', 'megane', 'corsa',
-  'astra', '500', 'panda', 'swift', 'jazz', 'civic'
-];
+// Price threshold for "premium" cars (in USD)
+const PREMIUM_PRICE_THRESHOLD = 200;
 
-function isExotic(carName) {
-  const lower = carName.toLowerCase();
-  
-  // Must match an exotic brand
-  const isExoticBrand = EXOTIC_BRANDS.some(b => lower.includes(b.toLowerCase()));
-  if (!isExoticBrand) return false;
-  
-  // Must NOT be a normal car variant
-  const isNormal = NORMAL_CAR_KEYWORDS.some(k => lower.includes(k.toLowerCase()));
-  if (isNormal) return false;
-  
-  return true;
+function extractPrice(text) {
+  // Extract numeric price from "from $XXX.XX / day" text
+  const match = text.match(/from\s*\$?(\d+(?:[.,]\d+)?)\s*\/\s*day/i);
+  if (!match) return null;
+  // Handle both "from 652$36" and "from $652.36" formats
+  const priceStr = match[1].replace(',', '');
+  return parseInt(priceStr, 10);
 }
 
-function isGuaranteedModel(carName, subheading) {
-  const text = `${carName} ${subheading || ''}`.toLowerCase();
-  return text.includes('guaranteed') && !text.includes('or similar');
+function isGuaranteed(text) {
+  return text.includes('Guaranteed model') && !text.includes('or similar');
 }
 
-async function fetchWithTimeout(url, options = {}, timeout = 15000) {
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
-    clearTimeout(id);
-    return res;
-  } catch (e) {
-    clearTimeout(id);
-    throw e;
-  }
+function extractCategory(text) {
+  const catMatch = text.match(/\|\s*([^from]+)\s*from/i);
+  return catMatch ? catMatch[1].trim() : 'Car';
 }
 
-async function fetchStationPageData(station) {
-  // Try to fetch the station page and extract page-data JSON URL
-  const stationUrl = `https://www.sixt.com/car-rental/${slugifyCountry(station.country)}/${slugifyCity(station.city)}/${slugifyStation(station.name)}/`;
-  
-  try {
-    const res = await fetchWithTimeout(stationUrl);
-    if (!res.ok) return null;
-    
-    const html = await res.text();
-    
-    // Extract page-data JSON URL
-    const pageDataMatch = html.match(/page-data-([a-f0-9]+)-([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2})\.json/);
-    if (!pageDataMatch) {
-      console.log(`  No page-data found for ${station.name}`);
-      return null;
-    }
-    
-    const pageDataUrl = `${stationUrl}page-data-${pageDataMatch[1]}-${pageDataMatch[2]}.json`;
-    
-    const pdRes = await fetchWithTimeout(pageDataUrl);
-    if (!pdRes.ok) return null;
-    
-    const pd = await pdRes.json();
-    return pd;
-  } catch (e) {
-    console.log(`  Error fetching ${station.name}: ${e.message}`);
-    return null;
-  }
-}
-
-function slugifyCountry(code) {
-  const map = {
-    'SE': 'sweden', 'FR': 'france', 'DE': 'germany', 'CH': 'switzerland',
-    'AE': 'united-arab-emirates', 'GB': 'united-kingdom', 'IT': 'italy',
-    'ES': 'spain', 'NL': 'netherlands', 'AT': 'austria', 'US': 'usa'
-  };
-  return map[code] || code.toLowerCase();
-}
-
-function slugifyCity(city) {
-  return city.toLowerCase()
-    .replace(/ /g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-}
-
-function slugifyStation(name) {
-  return name.toLowerCase()
-    .replace(/airport/g, 'airport')
-    .replace(/ /g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-}
-
-async function main() {
-  console.log('🚗 Sixt Exotic Car Fetcher');
-  console.log(`Checking ${stations.length} stations...\n`);
-  
-  const results = {
-    lastUpdated: new Date().toISOString(),
-    stations: [],
-    exotics: []
-  };
-  
-  for (const station of stations) {
-    console.log(`📍 ${station.name}`);
-    
-    const pageData = await fetchStationPageData(station);
-    
-    const stationResult = {
-      ...station,
-      hasExotics: false,
-      lastChecked: new Date().toISOString().split('T')[0]
-    };
-    
-    if (pageData) {
-      const offers = pageData?.data?.pageSpecificConfiguration?.fleetslider?.offers || [];
-      
-      for (const offer of offers) {
-        const carName = offer.heading || '';
-        const subheading = offer.subheading || '';
-        
-        if (isExotic(carName)) {
-          const guaranteed = isGuaranteedModel(carName, subheading);
-          
-          results.exotics.push({
-            stationId: station.id,
-            stationName: station.name,
-            model: carName,
-            brand: extractBrand(carName),
-            category: extractCategory(subheading),
-            guaranteed: guaranteed,
-            imageUrl: offer.sources?.[0]?.src || null,
-            firstSeen: new Date().toISOString().split('T')[0],
-            lastSeen: new Date().toISOString().split('T')[0]
-          });
-          
-          stationResult.hasExotics = true;
-          console.log(`  ✅ ${carName}${guaranteed ? ' (GUARANTEED)' : ''}`);
-        }
-      }
-      
-      if (!stationResult.hasExotics) {
-        console.log(`  ⚪ No exotics found`);
-      }
-    } else {
-      console.log(`  ❌ Could not fetch data`);
-    }
-    
-    results.stations.push(stationResult);
-    
-    // Rate limiting
-    await new Promise(r => setTimeout(r, 1000));
-  }
-  
-  // Save results
-  fs.writeFileSync(path.join(DATA_DIR, 'stations.json'), JSON.stringify(results.stations, null, 2));
-  fs.writeFileSync(path.join(DATA_DIR, 'exotics.json'), JSON.stringify(results.exotics, null, 2));
-  
-  console.log(`\n✅ Done!`);
-  console.log(`   Stations checked: ${results.stations.length}`);
-  console.log(`   Stations with exotics: ${results.stations.filter(s => s.hasExotics).length}`);
-  console.log(`   Total exotic cars found: ${results.exotics.length}`);
-  console.log(`   Guaranteed models: ${results.exotics.filter(e => e.guaranteed).length}`);
-}
-
-function extractBrand(carName) {
-  const brands = ['Porsche', 'Ferrari', 'Lamborghini', 'McLaren', 'Aston Martin', 
-    'Bentley', 'Rolls-Royce', 'Maserati', 'Chevrolet', 'Ford', 'BMW', 'Audi', 
-    'Mercedes-Benz', 'Mercedes-AMG', 'Tesla', 'Dodge'];
-  
-  for (const brand of brands) {
-    if (carName.toLowerCase().includes(brand.toLowerCase())) return brand;
+function extractBrand(name) {
+  const brands = [
+    ['Mercedes-AMG', 'mercedes-amg'], ['Mercedes-Benz', 'mercedes-benz'], ['Mercedes', 'mercedes'],
+    ['Porsche', 'porsche'], ['Ferrari', 'ferrari'], ['Lamborghini', 'lamborghini'],
+    ['McLaren', 'mclaren'], ['Aston Martin', 'aston martin'],
+    ['Bentley', 'bentley'], ['Rolls-Royce', 'rolls-royce'], ['Maserati', 'maserati'],
+    ['Chevrolet', 'chevrolet'], ['Ford', 'ford'], ['BMW', 'bmw'], ['Audi', 'audi'],
+    ['Tesla', 'tesla'], ['Dodge', 'dodge'], ['Jaguar', 'jaguar'], ['Land Rover', 'land rover'],
+    ['Volvo', 'volvo'], ['Infiniti', 'infiniti'], ['Lexus', 'lexus'], ['Cadillac', 'cadillac']
+  ];
+  const lower = name.toLowerCase();
+  for (const [brand, search] of brands) {
+    if (lower.includes(search)) return brand;
   }
   return 'Other';
 }
 
-function extractCategory(subheading) {
-  if (!subheading) return 'Unknown';
-  const parts = subheading.split('|').map(s => s.trim());
-  return parts[parts.length - 1] || 'Unknown';
+/**
+ * Scrape a station using the browser tool
+ * This is designed to be run via the browser automation
+ */
+function generateScrapeScript(station) {
+  const url = `https://www.sixt.com/car-rental/${station.slug}/`;
+  return `
+// Navigate to: ${url}
+// Then run:
+(() => {
+  const links = document.querySelectorAll('a[href*="betafunnel"]');
+  const cars = [];
+  links.forEach(link => {
+    const heading = link.querySelector('h3');
+    const img = link.querySelector('img[src*="fleet/png"]');
+    if (heading) {
+      const text = link.textContent.trim().replace(/\\s+/g, ' ');
+      const guaranteed = text.includes('Guaranteed model') && !text.includes('or similar');
+      const catMatch = text.match(/\\|\\s*([^from]+)\\s*from/i);
+      const category = catMatch ? catMatch[1].trim() : 'Car';
+      const priceMatch = text.match(/from\\s*([\\d$.,]+)\\s*\\/\\s*day/i);
+      const price = priceMatch ? '$' + priceMatch[1] + '/day' : null;
+      const priceNum = priceMatch ? parseInt(priceMatch[1].replace(/[^\\d]/g, '')) : 0;
+      cars.push({
+        model: heading.textContent.trim(),
+        category,
+        price,
+        priceNum,
+        guaranteed,
+        imageUrl: img ? img.src : null
+      });
+    }
+  });
+  return cars;
+})()
+`;
 }
 
-main().catch(console.error);
+/**
+ * Filter cars: keep if guaranteed OR price >= threshold
+ */
+function filterPremiumCars(cars) {
+  return cars.filter(c => {
+    if (c.guaranteed) return true;
+    if (c.priceNum && c.priceNum >= PREMIUM_PRICE_THRESHOLD) return true;
+    return false;
+  });
+}
+
+/**
+ * Main entry point - generates scrape instructions for all stations
+ */
+function main() {
+  console.log('🚗 Sixt Premium Car Finder');
+  console.log(`Strategy: Guaranteed models OR price >= $${PREMIUM_PRICE_THRESHOLD}/day`);
+  console.log(`Stations to check: ${stations.length}\n`);
+
+  // Generate scrape scripts for all stations
+  const scrapeScripts = stations.map(s => ({
+    station: s,
+    script: generateScrapeScript(s)
+  }));
+
+  // Save scrape scripts
+  const outputDir = path.join(__dirname, '..', 'scripts', 'generated');
+  fs.mkdirSync(outputDir, { recursive: true });
+
+  // Save as a single batch script
+  const batchScript = scrapeScripts.map(({ station, script }) =>
+    `\n// === ${station.name} (${station.id}) ===\n${script}`
+  ).join('\n');
+
+  fs.writeFileSync(path.join(outputDir, 'scrape-batch.js'), batchScript);
+
+  // Save stations as JSON for the app
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.join(DATA_DIR, 'stations.json'),
+    JSON.stringify(stations.map(s => ({ ...s, hasExotics: false, exoticCount: 0 })), null, 2)
+  );
+
+  // Save empty exotics template
+  fs.writeFileSync(
+    path.join(DATA_DIR, 'exotics.json'),
+    JSON.stringify([], null, 2)
+  );
+
+  console.log(`✅ Generated scrape scripts for ${stations.length} stations`);
+  console.log(`   Output: scripts/generated/scrape-batch.js`);
+  console.log(`\nTo scrape:`);
+  console.log(`   1. Open a browser tab for each station URL`);
+  console.log(`   2. Run the extraction JS in the console`);
+  console.log(`   3. Filter results: keep guaranteed OR price >= $${PREMIUM_PRICE_THRESHOLD}`);
+  console.log(`   4. Save to data/exotics.json`);
+}
+
+// Export for use by other scripts
+module.exports = {
+  stations,
+  PREMIUM_PRICE_THRESHOLD,
+  extractPrice,
+  isGuaranteed,
+  filterPremiumCars,
+  extractBrand,
+  extractCategory,
+  generateScrapeScript
+};
+
+if (require.main === module) {
+  main();
+}

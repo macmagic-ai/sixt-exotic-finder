@@ -1,24 +1,92 @@
-// Sixt stations with verified URL slugs
-// Format: slug = the actual path on sixt.com after /car-rental/{country}/
+/**
+ * Sixt Stations — Worldwide Airport Coverage
+ * Expanded list with major airports across all continents
+ */
+
 module.exports = [
-  { id: "ARN01", name: "Stockholm Arlanda Airport", city: "Stockholm", country: "SE", iata: "ARN", lat: 59.6519, lng: 17.9186, slug: "sweden/stockholm/stockholm-arlanda-airport" },
-  { id: "NCE01", name: "Nice Airport", city: "Nice", country: "FR", iata: "NCE", lat: 43.6654, lng: 7.2150, slug: "france/nice/nice-airport" },
-  { id: "FRA01", name: "Frankfurt Airport", city: "Frankfurt", country: "DE", iata: "FRA", lat: 50.0379, lng: 8.5622, slug: "germany/frankfurt/frankfurt-airport" },
-  { id: "MUC01", name: "Munich Airport", city: "Munich", country: "DE", iata: "MUC", lat: 48.3538, lng: 11.7861, slug: "germany/munich/munich-airport" },
-  { id: "ZRH01", name: "Zurich Airport", city: "Zurich", country: "CH", iata: "ZRH", lat: 47.4647, lng: 8.5492, slug: "switzerland/zurich/zurich-airport" },
-  { id: "GVA01", name: "Geneva Airport", city: "Geneva", country: "CH", iata: "GVA", lat: 46.2380, lng: 6.1089, slug: "switzerland/geneva/geneva-airport" },
-  { id: "DXB01", name: "Dubai Int. Airport Terminal 3", city: "Dubai", country: "AE", iata: "DXB", lat: 25.2532, lng: 55.3657, slug: "united-arab-emirates/dubai/dubai-int-airport-terminal-3" },
-  { id: "LHR01", name: "London Heathrow Airport", city: "London", country: "GB", iata: "LHR", lat: 51.4700, lng: -0.4543, slug: "united-kingdom/london/london-heathrow-airport" },
-  { id: "CDG01", name: "Paris CDG Airport", city: "Paris", country: "FR", iata: "CDG", lat: 49.0097, lng: 2.5479, slug: "france/roissy/paris-cdg-airport" },
-  { id: "MXP01", name: "Milan Malpensa Airport T1", city: "Milan", country: "IT", iata: "MXP", lat: 45.6306, lng: 8.7281, slug: "italy/milan/milan-ap-malpensa-t1" },
-  { id: "FCO01", name: "Rome Fiumicino Airport", city: "Rome", country: "IT", iata: "FCO", lat: 41.8003, lng: 12.2389, slug: "italy/rome/rome-fiumicino-airport" },
-  { id: "BCN01", name: "Barcelona Airport", city: "Barcelona", country: "ES", iata: "BCN", lat: 41.2974, lng: 2.0833, slug: "spain/barcelona/barcelona-airport" },
-  { id: "MAD01", name: "Madrid Barajas Airport", city: "Madrid", country: "ES", iata: "MAD", lat: 40.4983, lng: -3.5676, slug: "spain/madrid/madrid-barajas-airport" },
-  { id: "AMS01", name: "Amsterdam Schiphol Airport", city: "Amsterdam", country: "NL", iata: "AMS", lat: 52.3105, lng: 4.7683, slug: "netherlands/amsterdam/amsterdam-schiphol-airport" },
-  { id: "VIE01", name: "Vienna Airport", city: "Vienna", country: "AT", iata: "VIE", lat: 48.1103, lng: 16.5697, slug: "austria/vienna/vienna-airport" },
-  { id: "LAX01", name: "Los Angeles Airport", city: "Los Angeles", country: "US", iata: "LAX", lat: 33.9425, lng: -118.4081, slug: "usa/los-angeles/los-angeles-airport" },
-  { id: "MIA01", name: "Miami Airport", city: "Miami", country: "US", iata: "MIA", lat: 25.7959, lng: -80.2870, slug: "usa/miami/miami-airport" },
-  { id: "JFK01", name: "New York JFK Airport", city: "New York", country: "US", iata: "JFK", lat: 40.6413, lng: -73.7781, slug: "usa/new-york/new-york-jfk-airport" },
-  { id: "LAS01", name: "Las Vegas Airport", city: "Las Vegas", country: "US", iata: "LAS", lat: 36.0840, lng: -115.1537, slug: "usa/las-vegas/las-vegas-airport" },
-  { id: "SFO01", name: "San Francisco Airport", city: "San Francisco", country: "US", iata: "SFO", lat: 37.6213, lng: -122.3790, slug: "usa/san-francisco/san-francisco-airport" },
+  // Europe
+  { id: 'ARN01', name: 'Stockholm Arlanda Airport', city: 'Stockholm', country: 'SE', slug: 'sweden/stockholm/stockholm-arlanda-airport', lat: 59.6519, lng: 17.9186 },
+  { id: 'OSL01', name: 'Oslo Airport', city: 'Oslo', country: 'NO', slug: 'norway/oslo/oslo-airport', lat: 60.1976, lng: 11.1004 },
+  { id: 'CPH01', name: 'Copenhagen Airport', city: 'Copenhagen', country: 'DK', slug: 'denmark/copenhagen/copenhagen-airport', lat: 55.6180, lng: 12.6508 },
+  { id: 'HEL01', name: 'Helsinki Airport', city: 'Helsinki', country: 'FI', slug: 'finland/helsinki/helsinki-airport', lat: 60.3172, lng: 24.9633 },
+  { id: 'NCE01', name: 'Nice Airport', city: 'Nice', country: 'FR', slug: 'france/nice/nice-airport', lat: 43.6584, lng: 7.2158 },
+  { id: 'CDG01', name: 'Paris CDG Airport', city: 'Paris', country: 'FR', slug: 'france/roissy/paris-cdg-airport', lat: 49.0097, lng: 2.5479 },
+  { id: 'ORY01', name: 'Paris Orly Airport', city: 'Paris', country: 'FR', slug: 'france/paris/paris-orly-airport', lat: 48.7262, lng: 2.3652 },
+  { id: 'FRA01', name: 'Frankfurt Airport', city: 'Frankfurt', country: 'DE', slug: 'germany/frankfurt/frankfurt-airport', lat: 50.0379, lng: 8.5622 },
+  { id: 'MUC01', name: 'Munich Airport', city: 'Munich', country: 'DE', slug: 'germany/munich/munich-airport', lat: 48.3539, lng: 11.7861 },
+  { id: 'HAM01', name: 'Hamburg Airport', city: 'Hamburg', country: 'DE', slug: 'germany/hamburg/hamburg-airport', lat: 53.6304, lng: 9.9882 },
+  { id: 'BER01', name: 'Berlin Brandenburg Airport', city: 'Berlin', country: 'DE', slug: 'germany/berlin/berlin-brandenburg-airport', lat: 52.3667, lng: 13.5033 },
+  { id: 'DUS01', name: 'Dusseldorf Airport', city: 'Dusseldorf', country: 'DE', slug: 'germany/dusseldorf/dusseldorf-airport', lat: 51.2895, lng: 6.7668 },
+  { id: 'ZRH01', name: 'Zurich Airport', city: 'Zurich', country: 'CH', slug: 'switzerland/zurich/zurich-airport', lat: 47.4647, lng: 8.5492 },
+  { id: 'GVA01', name: 'Geneva Airport', city: 'Geneva', country: 'CH', slug: 'switzerland/geneva/geneva-airport', lat: 46.2382, lng: 6.1092 },
+  { id: 'LHR01', name: 'London Heathrow Airport', city: 'London', country: 'GB', slug: 'united-kingdom/london/london-heathrow-airport', lat: 51.4700, lng: -0.4543 },
+  { id: 'LGW01', name: 'London Gatwick Airport', city: 'London', country: 'GB', slug: 'united-kingdom/london/london-gatwick-airport', lat: 51.1537, lng: -0.1821 },
+  { id: 'FCO01', name: 'Rome Fiumicino Airport', city: 'Rome', country: 'IT', slug: 'italy/rome/rome-fiumicino-airport', lat: 41.8003, lng: 12.2389 },
+  { id: 'MXP01', name: 'Milan Malpensa Airport', city: 'Milan', country: 'IT', slug: 'italy/milan/milan-ap-malpensa-t1', lat: 45.6306, lng: 8.7281 },
+  { id: 'VCE01', name: 'Venice Airport', city: 'Venice', country: 'IT', slug: 'italy/venice/venice-airport', lat: 45.5053, lng: 12.3519 },
+  { id: 'BCN01', name: 'Barcelona Airport', city: 'Barcelona', country: 'ES', slug: 'spain/barcelona/bcn-barcelona-airport', lat: 41.2974, lng: 2.0833 },
+  { id: 'MAD01', name: 'Madrid Barajas Airport', city: 'Madrid', country: 'ES', slug: 'spain/madrid/madrid-barajas-airport', lat: 40.4983, lng: -3.5676 },
+  { id: 'AMS01', name: 'Amsterdam Schiphol Airport', city: 'Amsterdam', country: 'NL', slug: 'netherlands/amsterdam/amsterdam-schiphol-airport', lat: 52.3105, lng: 4.7683 },
+  { id: 'VIE01', name: 'Vienna Airport', city: 'Vienna', country: 'AT', slug: 'austria/vienna/vienna-airport', lat: 48.1103, lng: 16.5697 },
+  { id: 'PRG01', name: 'Prague Airport', city: 'Prague', country: 'CZ', slug: 'czech-republic/prague/prague-airport', lat: 50.1008, lng: 14.2632 },
+  { id: 'WAW01', name: 'Warsaw Airport', city: 'Warsaw', country: 'PL', slug: 'poland/warsaw/warsaw-airport', lat: 52.1657, lng: 20.9671 },
+  { id: 'BUD01', name: 'Budapest Airport', city: 'Budapest', country: 'HU', slug: 'hungary/budapest/budapest-airport', lat: 47.4298, lng: 19.2611 },
+  { id: 'ATH01', name: 'Athens Airport', city: 'Athens', country: 'GR', slug: 'greece/athens/athens-airport', lat: 37.9364, lng: 23.9445 },
+  { id: 'LIS01', name: 'Lisbon Airport', city: 'Lisbon', country: 'PT', slug: 'portugal/lisbon/lisbon-airport', lat: 38.7756, lng: -9.1354 },
+  { id: 'IST01', name: 'Istanbul Airport', city: 'Istanbul', country: 'TR', slug: 'turkey/istanbul/istanbul-airport', lat: 41.2753, lng: 28.7519 },
+
+  // Middle East
+  { id: 'DXB01', name: 'Dubai Int. Airport Terminal 3', city: 'Dubai', country: 'AE', slug: 'united-arab-emirates/dubai/dubai-int-airport-terminal-3', lat: 25.2532, lng: 55.3657 },
+  { id: 'AUH01', name: 'Abu Dhabi Airport', city: 'Abu Dhabi', country: 'AE', slug: 'united-arab-emirates/abu-dhabi/abu-dhabi-airport', lat: 24.4330, lng: 54.6511 },
+  { id: 'DOH01', name: 'Doha Hamad Airport', city: 'Doha', country: 'QA', slug: 'qatar/doha/doha-hamad-airport', lat: 25.2731, lng: 51.6080 },
+  { id: 'TLV01', name: 'Tel Aviv Airport', city: 'Tel Aviv', country: 'IL', slug: 'israel/tel-aviv/tel-aviv-airport', lat: 32.0114, lng: 34.8867 },
+
+  // Asia
+  { id: 'SIN01', name: 'Singapore Changi Airport', city: 'Singapore', country: 'SG', slug: 'singapore/singapore/singapore-changi-airport', lat: 1.3644, lng: 103.9915 },
+  { id: 'BKK01', name: 'Bangkok Suvarnabhumi Airport', city: 'Bangkok', country: 'TH', slug: 'thailand/bangkok/bangkok-suvarnabhumi-airport', lat: 13.6900, lng: 100.7501 },
+  { id: 'HKG01', name: 'Hong Kong Airport', city: 'Hong Kong', country: 'HK', slug: 'hong-kong/hong-kong/hong-kong-airport', lat: 22.3080, lng: 113.9185 },
+  { id: 'NRT01', name: 'Tokyo Narita Airport', city: 'Tokyo', country: 'JP', slug: 'japan/tokyo/tokyo-narita-airport', lat: 35.7647, lng: 140.3864 },
+  { id: 'HND01', name: 'Tokyo Haneda Airport', city: 'Tokyo', country: 'JP', slug: 'japan/tokyo/tokyo-haneda-airport', lat: 35.5494, lng: 139.7798 },
+  { id: 'ICN01', name: 'Seoul Incheon Airport', city: 'Seoul', country: 'KR', slug: 'south-korea/seoul/seoul-incheon-airport', lat: 37.4602, lng: 126.4407 },
+  { id: 'KUL01', name: 'Kuala Lumpur Airport', city: 'Kuala Lumpur', country: 'MY', slug: 'malaysia/kuala-lumpur/kuala-lumpur-airport', lat: 2.7456, lng: 101.7072 },
+  { id: 'MNL01', name: 'Manila Airport', city: 'Manila', country: 'PH', slug: 'philippines/manila/manila-airport', lat: 14.5086, lng: 121.0194 },
+  { id: 'CGK01', name: 'Jakarta Airport', city: 'Jakarta', country: 'ID', slug: 'indonesia/jakarta/jakarta-airport', lat: -6.1256, lng: 106.6559 },
+
+  // North America
+  { id: 'JFK01', name: 'New York JFK Airport', city: 'New York', country: 'US', slug: 'usa/new-york/jfk-airport', lat: 40.6413, lng: -73.7781 },
+  { id: 'LGA01', name: 'New York LaGuardia Airport', city: 'New York', country: 'US', slug: 'usa/new-york/new-york-laguardia-airport', lat: 40.7769, lng: -73.8740 },
+  { id: 'EWR01', name: 'Newark Airport', city: 'Newark', country: 'US', slug: 'usa/newark/newark-airport', lat: 40.6895, lng: -74.1745 },
+  { id: 'LAX01', name: 'Los Angeles Airport', city: 'Los Angeles', country: 'US', slug: 'usa/los-angeles/los-angeles-airport', lat: 33.9416, lng: -118.4085 },
+  { id: 'SFO01', name: 'San Francisco Airport', city: 'San Francisco', country: 'US', slug: 'usa/san-francisco/sfo-san-francisco-airport', lat: 37.6213, lng: -122.3790 },
+  { id: 'MIA01', name: 'Miami Airport', city: 'Miami', country: 'US', slug: 'usa/miami-fl/miami-international-airport', lat: 25.7959, lng: -80.2870 },
+  { id: 'LAS01', name: 'Las Vegas Airport', city: 'Las Vegas', country: 'US', slug: 'usa/las-vegas/las-vegas-mccarran-airport', lat: 36.0840, lng: -115.1537 },
+  { id: 'ORD01', name: 'Chicago OHare Airport', city: 'Chicago', country: 'US', slug: 'usa/chicago/chicago-ohare-airport', lat: 41.9742, lng: -87.9073 },
+  { id: 'DFW01', name: 'Dallas Fort Worth Airport', city: 'Dallas', country: 'US', slug: 'usa/dallas/dallas-fort-worth-airport', lat: 32.8998, lng: -97.0403 },
+  { id: 'DEN01', name: 'Denver Airport', city: 'Denver', country: 'US', slug: 'usa/denver/denver-airport', lat: 39.8561, lng: -104.6737 },
+  { id: 'SEA01', name: 'Seattle Airport', city: 'Seattle', country: 'US', slug: 'usa/seattle/seattle-airport', lat: 47.4502, lng: -122.3088 },
+  { id: 'ATL01', name: 'Atlanta Airport', city: 'Atlanta', country: 'US', slug: 'usa/atlanta/atlanta-airport', lat: 33.6407, lng: -84.4277 },
+  { id: 'BOS01', name: 'Boston Airport', city: 'Boston', country: 'US', slug: 'usa/boston/boston-airport', lat: 42.3656, lng: -71.0096 },
+  { id: 'PHX01', name: 'Phoenix Airport', city: 'Phoenix', country: 'US', slug: 'usa/phoenix/phoenix-airport', lat: 33.4343, lng: -112.0116 },
+  { id: 'IAD01', name: 'Washington Dulles Airport', city: 'Washington', country: 'US', slug: 'usa/washington-dc/washington-dulles-airport', lat: 38.9531, lng: -77.4565 },
+  { id: 'YVR01', name: 'Vancouver Airport', city: 'Vancouver', country: 'CA', slug: 'canada/vancouver/vancouver-airport', lat: 49.1967, lng: -123.1815 },
+  { id: 'YYZ01', name: 'Toronto Pearson Airport', city: 'Toronto', country: 'CA', slug: 'canada/toronto/toronto-pearson-airport', lat: 43.6777, lng: -79.6248 },
+
+  // South America
+  { id: 'GRU01', name: 'Sao Paulo Guarulhos Airport', city: 'Sao Paulo', country: 'BR', slug: 'brazil/sao-paulo/sao-paulo-guarulhos-airport', lat: -23.4356, lng: -46.4731 },
+  { id: 'GIG01', name: 'Rio de Janeiro Airport', city: 'Rio de Janeiro', country: 'BR', slug: 'brazil/rio-de-janeiro/rio-de-janeiro-airport', lat: -22.8090, lng: -43.2506 },
+  { id: 'EZE01', name: 'Buenos Aires Airport', city: 'Buenos Aires', country: 'AR', slug: 'argentina/buenos-aires/buenos-aires-airport', lat: -34.8222, lng: -58.5358 },
+  { id: 'SCL01', name: 'Santiago Airport', city: 'Santiago', country: 'CL', slug: 'chile/santiago/santiago-airport', lat: -33.3930, lng: -70.7858 },
+  { id: 'BOG01', name: 'Bogota Airport', city: 'Bogota', country: 'CO', slug: 'colombia/bogota/bogota-airport', lat: 4.7016, lng: -74.1469 },
+  { id: 'MEX01', name: 'Mexico City Airport', city: 'Mexico City', country: 'MX', slug: 'mexico/mexico-city/mexico-city-airport', lat: 19.4363, lng: -99.0721 },
+
+  // Africa
+  { id: 'JNB01', name: 'Johannesburg Airport', city: 'Johannesburg', country: 'ZA', slug: 'south-africa/johannesburg/johannesburg-airport', lat: -26.1392, lng: 28.2460 },
+  { id: 'CPT01', name: 'Cape Town Airport', city: 'Cape Town', country: 'ZA', slug: 'south-africa/cape-town/cape-town-airport', lat: -33.9715, lng: 18.6021 },
+  { id: 'CAI01', name: 'Cairo Airport', city: 'Cairo', country: 'EG', slug: 'egypt/cairo/cairo-airport', lat: 30.1219, lng: 31.4056 },
+  { id: 'CMN01', name: 'Casablanca Airport', city: 'Casablanca', country: 'MA', slug: 'morocco/casablanca/casablanca-airport', lat: 33.3675, lng: -7.5898 },
+
+  // Oceania
+  { id: 'SYD01', name: 'Sydney Airport', city: 'Sydney', country: 'AU', slug: 'australia/sydney/sydney-airport', lat: -33.9399, lng: 151.1753 },
+  { id: 'MEL01', name: 'Melbourne Airport', city: 'Melbourne', country: 'AU', slug: 'australia/melbourne/melbourne-airport', lat: -37.6733, lng: 144.8430 },
+  { id: 'AKL01', name: 'Auckland Airport', city: 'Auckland', country: 'NZ', slug: 'new-zealand/auckland/auckland-airport', lat: -37.0082, lng: 174.7917 },
 ];
