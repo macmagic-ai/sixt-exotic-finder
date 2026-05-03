@@ -7,6 +7,8 @@
   <meta name="description" content="Find guaranteed exotic and supercar rentals at Sixt stations worldwide. Map + listings for car enthusiasts planning their next drive.">
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <script>
@@ -136,6 +138,14 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* Map */
+    #map { height: 500px; border-radius: 20px; z-index: 1; }
+    .leaflet-popup-content-wrapper {
+      background: rgba(19,19,31,0.95) !important; backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 16px !important; color: white;
+    }
+    .leaflet-popup-tip { background: rgba(19,19,31,0.95) !important; }
+
     /* Filter select */
     .magic-select {
       background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
@@ -243,12 +253,17 @@
       </div>
 
       <!-- Main Content -->
-      <main class="pb-24">
+      <main class="pb-24 space-y-8">
+        <!-- Map -->
+        <div class="magic-card p-1">
+          <div id="map"></div>
+        </div>
+
         <!-- Car Grid -->
         <div>
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-xl font-bold">
-              <span class="text-gradient">Exotic Cars</span>
+              <span class="text-gradient">Guaranteed Models</span>
               <span id="cars-count" class="text-sm text-white/40 font-normal ml-2"></span>
             </h3>
           </div>

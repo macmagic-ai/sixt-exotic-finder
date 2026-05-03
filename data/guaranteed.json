@@ -1,0 +1,156 @@
+[
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Mercedes-Benz AMG GT",
+    "brand": "Mercedes-Benz",
+    "category": "Extraordinary Coupe Automatic",
+    "price": "$652/day",
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-gt-amg-2d-weiss-2017.png",
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Mercedes-Benz SL63 AMG Cabriolet",
+    "brand": "Mercedes-Benz",
+    "category": "Extraordinary Convertible Automatic",
+    "price": "$803/day",
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-sl63-amg-convertible-silver-2022.png",
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "DXB01",
+    "stationName": "Dubai Int. Airport Terminal 3",
+    "model": "Mercedes-AMG SL 55 V8 BITURBO 4MATIC+",
+    "brand": "Mercedes-AMG",
+    "category": "Extraordinary Convertible Automatic",
+    "price": "$1,373/day",
+    "imageUrl": "https://www.sixt.com/fileadmin2/files/global/sideview/user_upload/fleet/png/350x200/mb-sl63-amg-convertible-2d-red-2022-JV.png",
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-Benz CLA",
+    "brand": "Mercedes-Benz",
+    "category": "Midsize Elite Sedan Automatic",
+    "price": "$152/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "BMW M5",
+    "brand": "BMW",
+    "category": "Premium Elite Sedan Automatic",
+    "price": "$458/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-Benz S-Class Long",
+    "brand": "Mercedes-Benz",
+    "category": "Extraordinary Sedan Automatic",
+    "price": "$474/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "BMW M5 Touring",
+    "brand": "BMW",
+    "category": "Premium Elite Wagon Automatic",
+    "price": "$486/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Porsche Panamera",
+    "brand": "Porsche",
+    "category": "Extraordinary Sedan Automatic",
+    "price": "$520/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "BMW X7 M60",
+    "brand": "BMW",
+    "category": "Extraordinary SUV Automatic",
+    "price": "$536/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-AMG GLS 63",
+    "brand": "Mercedes-AMG",
+    "category": "Extraordinary SUV Automatic",
+    "price": "$578/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-AMG GT 63",
+    "brand": "Mercedes-AMG",
+    "category": "Full-size Elite Coupe Automatic",
+    "price": "$592/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Mercedes-AMG SL 63 Roadster",
+    "brand": "Mercedes-AMG",
+    "category": "Full-size Elite Convertible Automatic",
+    "price": "$696/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Porsche 911 Carrera",
+    "brand": "Porsche",
+    "category": "Midsize Elite Coupe Automatic",
+    "price": "$705/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Porsche 911 Cabriolet/Targa",
+    "brand": "Porsche",
+    "category": "Midsize Elite Convertible Automatic",
+    "price": "$744/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  }
+]
