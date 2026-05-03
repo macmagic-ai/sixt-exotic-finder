@@ -268,7 +268,7 @@ function updateMapMarkers() {
               <p class="text-emerald-400 font-semibold text-sm">${stationExotics.length} exotic car${stationExotics.length > 1 ? 's' : ''}</p>
               ${stationExotics.slice(0, 3).map(e =>
                 `<div class="text-sm flex items-center gap-1.5 text-white/80">
-                  ${e.guaranteed ? '<span class="text-pink-400">🔒</span>' : ''}
+                  ${e.guaranteed ? '<span class="text-pink-400 text-xs font-bold">[G]</span>' : ''}
                   ${e.model}
                 </div>`
               ).join('')}
@@ -295,7 +295,7 @@ function renderList() {
   if (stationsWithExotics.length === 0) {
     stationsGrid.innerHTML = `
       <div class="col-span-full text-center py-16">
-        <div class="text-6xl mb-4 opacity-50">🔍</div>
+        <div class="text-4xl font-bold mb-4 opacity-30">NO RESULTS</div>
         <p class="text-white/40 text-lg">No exotic cars match your filters</p>
         <p class="text-white/20 text-sm mt-2">Try adjusting your search criteria</p>
       </div>
@@ -318,7 +318,7 @@ function renderList() {
           <div class="space-y-2">
             ${stationExotics.map(e => `
               <div class="flex items-center gap-3 text-sm py-1.5 px-3 rounded-lg bg-white/5">
-                ${e.guaranteed ? '<span class="text-pink-400 text-base" title="Guaranteed Model">🔒</span>' : '<span class="w-4"></span>'}
+                ${e.guaranteed ? '<span class="text-pink-400 text-xs font-bold px-1.5 py-0.5 rounded bg-pink-500/10 border border-pink-500/20">GUARANTEED</span>' : '<span class="w-4"></span>'}
                 ${e.imageUrl ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="" class="w-8 h-5 object-contain opacity-80">` : ''}
                 <span class="${e.guaranteed ? 'text-pink-200 font-medium' : 'text-white/70'}">${e.model}</span>
                 <span class="text-xs text-white/30 ml-auto">${e.price || e.category}</span>
@@ -327,7 +327,7 @@ function renderList() {
           </div>
           ${station.iata ? `
             <div class="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs">
-              <span class="text-white/30">✈️ ${station.iata}</span>
+              <span class="text-white/30">${station.iata}</span>
               <a href="https://www.sixt.com/car-rental/${slugifyCountry(station.country)}/${slugifyCity(station.city)}/${slugifyStation(station.name)}/"
                  target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">Book on Sixt →</a>
             </div>
@@ -351,7 +351,7 @@ function renderList() {
         <div class="car-image-bg aspect-[4/3] flex items-center justify-center relative">
           ${e.imageUrl
             ? `<img src="${e.imageUrl.startsWith('http') ? e.imageUrl : 'https://www.sixt.com' + e.imageUrl}" alt="${e.model}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 relative z-10">`
-            : `<div class="text-7xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 relative z-10">🏎️</div>`
+            : `<div class="text-4xl font-bold opacity-10 group-hover:opacity-20 transition-opacity duration-500 relative z-10 tracking-widest">SIXT</div>`
           }
           ${e.guaranteed
             ? `<div class="absolute top-3 right-3 px-3 py-1 rounded-xl bg-pink-500/80 text-white text-xs font-bold backdrop-blur-sm z-20 border border-pink-400/30">GUARANTEED</div>`
