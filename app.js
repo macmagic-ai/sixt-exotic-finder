@@ -111,9 +111,10 @@ async function init() {
   initParticles();
 
   try {
+    const cacheBust = '?v=' + Date.now();
     const [stationsRes, exoticsRes] = await Promise.all([
-      fetch('data/stations.json'),
-      fetch('data/exotics.json')
+      fetch('data/stations.json' + cacheBust),
+      fetch('data/exotics.json' + cacheBust)
     ]);
 
     stations = await stationsRes.json();
