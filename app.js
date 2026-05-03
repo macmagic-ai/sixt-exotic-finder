@@ -184,6 +184,7 @@ function getFilteredData() {
   const country = document.getElementById('filter-country').value;
   const brand = document.getElementById('filter-brand').value;
   const guaranteedOnly = document.getElementById('filter-guaranteed').checked;
+  const minPrice = parseInt(document.getElementById('filter-price').value) || 0;
   const search = document.getElementById('search-input').value.toLowerCase();
 
   let filteredExotics = exotics;
@@ -199,6 +200,13 @@ function getFilteredData() {
 
   if (guaranteedOnly) {
     filteredExotics = filteredExotics.filter(e => e.guaranteed);
+  }
+
+  if (minPrice > 0) {
+    filteredExotics = filteredExotics.filter(e => {
+      const priceMatch = e.price.match(/\$(\d+)/);
+      return priceMatch && parseInt(priceMatch[1]) >= minPrice;
+    });
   }
 
   if (search) {
@@ -391,11 +399,14 @@ function setupEventListeners() {
   });
 
   // Filters
-  ['filter-country', 'filter-brand', 'filter-guaranteed'].forEach(id => {
-    document.getElementById(id).addEventListener('change', () => {
-      updateMapMarkers();
-      renderList();
-    });
+  ['filter-country', 'filter-brand', 'filter-guaranteed', 'filter-price'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', () => {
+        updateMapMarkers();
+        renderList();
+      });
+    }
   });
 
   document.getElementById('search-input').addEventListener('input', () => {
