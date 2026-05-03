@@ -79,7 +79,7 @@ async function fetchWithTimeout(url, timeout = 15000) {
 }
 
 async function fetchStationFleet(station) {
-  const stationUrl = `https://www.sixt.com/car-rental/${slugifyCountry(station.country)}/${slugifyCity(station.city)}/${slugifyStation(station.name)}/`;
+  const stationUrl = `https://www.sixt.com/car-rental/${station.slug}/`;
 
   try {
     // Step 1: Get station page HTML to find page-data URL
@@ -112,8 +112,10 @@ async function fetchStationFleet(station) {
 
     const cars = [];
     for (const offer of offers) {
-      const carName = offer.heading || '';
+      const heading = offer.heading || '';
       const subheading = offer.subheading || '';
+      // Sixt puts the actual model in subheading (e.g., "or similar | FORD MUSTANG CONVERTIBLE")
+      const carName = subheading.replace(/^or similar\s*\|\s*/, '').trim() || heading;
 
       if (isExotic(carName)) {
         cars.push({
@@ -122,7 +124,7 @@ async function fetchStationFleet(station) {
           model: carName,
           brand: extractBrand(carName),
           category: extractCategory(subheading),
-          guaranteed: isGuaranteed(carName, subheading),
+          guaranteed: isGuaranteed(heading, subheading),
           imageUrl: offer.sources?.[0]?.src || null,
           sixtUrl: offer.href ? `https://www.sixt.com${offer.href}` : null,
           firstSeen: new Date().toISOString().split('T')[0],
@@ -137,26 +139,6 @@ async function fetchStationFleet(station) {
     console.log(`  ❌ Error: ${e.message}`);
     return [];
   }
-}
-
-function slugifyCountry(code) {
-  const map = {
-    'SE': 'sweden', 'FR': 'france', 'DE': 'germany', 'CH': 'switzerland',
-    'AE': 'united-arab-emirates', 'GB': 'united-kingdom', 'IT': 'italy',
-    'ES': 'spain', 'NL': 'netherlands', 'AT': 'austria', 'US': 'usa'
-  };
-  return map[code] || code.toLowerCase();
-}
-
-function slugifyCity(city) {
-  return city.toLowerCase().replace(/ /g, '-').replace(/[^a-z0-9-]/g, '');
-}
-
-function slugifyStation(name) {
-  return name.toLowerCase()
-    .replace(/airport/g, 'airport')
-    .replace(/ /g, '-')
-    .replace(/[^a-z0-9-]/g, '');
 }
 
 async function main() {
