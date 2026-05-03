@@ -1,0 +1,211 @@
+[
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Porsche 911 Carrera",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Porsche Cayman",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "ARN01",
+    "stationName": "Stockholm Arlanda Airport",
+    "model": "Porsche Panamera",
+    "brand": "Porsche",
+    "category": "Luxury Sedan",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "NCE01",
+    "stationName": "Nice Côte d'Azur Airport",
+    "model": "Ferrari 488 Spider",
+    "brand": "Ferrari",
+    "category": "Supercar",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "NCE01",
+    "stationName": "Nice Côte d'Azur Airport",
+    "model": "Lamborghini Huracán",
+    "brand": "Lamborghini",
+    "category": "Supercar",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "NCE01",
+    "stationName": "Nice Côte d'Azur Airport",
+    "model": "Porsche 911 Carrera S",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MUC01",
+    "stationName": "Munich Airport",
+    "model": "Porsche 911 Turbo S",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MUC01",
+    "stationName": "Munich Airport",
+    "model": "Mercedes-AMG GT",
+    "brand": "Mercedes-AMG",
+    "category": "Sports Car",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "ZRH01",
+    "stationName": "Zurich Airport",
+    "model": "Porsche 911 Carrera",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "DXB01",
+    "stationName": "Dubai Airport",
+    "model": "Lamborghini Urus",
+    "brand": "Lamborghini",
+    "category": "Premium SUV",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "DXB01",
+    "stationName": "Dubai Airport",
+    "model": "Ferrari Roma",
+    "brand": "Ferrari",
+    "category": "Supercar",
+    "guaranteed": true,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LAX01",
+    "stationName": "Los Angeles LAX",
+    "model": "Chevrolet Corvette",
+    "brand": "Chevrolet",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LAX01",
+    "stationName": "Los Angeles LAX",
+    "model": "Ford Mustang",
+    "brand": "Ford",
+    "category": "Convertible",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MIA01",
+    "stationName": "Miami Airport",
+    "model": "Porsche 911",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LAS01",
+    "stationName": "Las Vegas Airport",
+    "model": "Chevrolet Corvette",
+    "brand": "Chevrolet",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LAS01",
+    "stationName": "Las Vegas Airport",
+    "model": "Ford Mustang GT",
+    "brand": "Ford",
+    "category": "Convertible",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "FRA01",
+    "stationName": "Frankfurt Airport",
+    "model": "Porsche 911",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "CDG01",
+    "stationName": "Paris Charles de Gaulle",
+    "model": "Porsche 911",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "LHR01",
+    "stationName": "London Heathrow",
+    "model": "Porsche 911",
+    "brand": "Porsche",
+    "category": "Sports Car",
+    "guaranteed": false,
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  }
+]
