@@ -7,7 +7,8 @@
     "iata": "ARN",
     "lat": 59.6519,
     "lng": 17.9186,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -18,7 +19,8 @@
     "iata": "NCE",
     "lat": 43.6654,
     "lng": 7.215,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -29,7 +31,8 @@
     "iata": "FRA",
     "lat": 50.0379,
     "lng": 8.5622,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -40,7 +43,8 @@
     "iata": "MUC",
     "lat": 48.3538,
     "lng": 11.7861,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -51,7 +55,8 @@
     "iata": "ZRH",
     "lat": 47.4647,
     "lng": 8.5492,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -63,6 +68,7 @@
     "lat": 46.238,
     "lng": 6.1089,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -73,7 +79,8 @@
     "iata": "DXB",
     "lat": 25.2532,
     "lng": 55.3657,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -84,7 +91,8 @@
     "iata": "LHR",
     "lat": 51.47,
     "lng": -0.4543,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -95,7 +103,8 @@
     "iata": "CDG",
     "lat": 49.0097,
     "lng": 2.5479,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -107,6 +116,7 @@
     "lat": 45.6306,
     "lng": 8.7281,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -118,6 +128,7 @@
     "lat": 41.8003,
     "lng": 12.2389,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -129,6 +140,7 @@
     "lat": 41.2974,
     "lng": 2.0833,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -140,6 +152,7 @@
     "lat": 40.4983,
     "lng": -3.5676,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -151,6 +164,7 @@
     "lat": 52.3105,
     "lng": 4.7683,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -162,6 +176,7 @@
     "lat": 48.1103,
     "lng": 16.5697,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -172,7 +187,8 @@
     "iata": "LAX",
     "lat": 33.9425,
     "lng": -118.4081,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -183,7 +199,8 @@
     "iata": "MIA",
     "lat": 25.7959,
     "lng": -80.287,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -195,6 +212,7 @@
     "lat": 40.6413,
     "lng": -73.7781,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -205,7 +223,8 @@
     "iata": "LAS",
     "lat": 36.084,
     "lng": -115.1537,
-    "hasExotics": true,
+    "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   },
   {
@@ -217,6 +236,7 @@
     "lat": 37.6213,
     "lng": -122.379,
     "hasExotics": false,
+    "exoticCount": 0,
     "lastChecked": "2026-05-03"
   }
 ]

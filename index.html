@@ -5,247 +5,321 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sixt Exotic Finder | Discover Guaranteed Supercars</title>
   <meta name="description" content="Find guaranteed exotic and supercar rentals at Sixt stations worldwide. Map + listings for car enthusiasts planning their next drive.">
-  
-  <!-- Tailwind CSS -->
+
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            night: '#0a0a0f',
+            surface: '#13131f',
+            glass: 'rgba(255,255,255,0.06)',
+          }
         }
       }
     }
   </script>
-  
+
   <style>
     :root {
-      --map-bg: #1a1a2e;
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.3);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.3);
     }
-    
+
+    * { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent; }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-      min-height: 100vh;
-      color: white;
+      background: #0a0a0f;
+      color: #fff;
+      overflow-x: hidden;
     }
-    
-    .glass {
-      background: rgba(255, 255, 255, 0.07);
+
+    /* Animated gradient mesh background */
+    .mesh-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(139,92,246,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 20%, rgba(245,158,11,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 50% at 50% 80%, rgba(236,72,153,0.06) 0%, transparent 60%);
+      animation: meshMove 20s ease-in-out infinite alternate;
+    }
+    @keyframes meshMove {
+      0% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(2%,-1%) scale(1.02); }
+      66% { transform: translate(-1%,2%) scale(0.98); }
+      100% { transform: translate(1%,1%) scale(1.01); }
+    }
+
+    /* Particle canvas */
+    #particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+    /* Glass card with gradient border */
+    .magic-card {
+      position: relative;
+      background: rgba(255,255,255,0.03);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
-    .glass-strong {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    .magic-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 20px; padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03), rgba(139,92,246,0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      pointer-events: none;
     }
-    
-    .glass-card {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .magic-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(139,92,246,0.15), 0 0 40px rgba(245,158,11,0.08);
+    }
+
+    /* Glow button */
+    .glow-btn {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #8b5cf6, #f59e0b);
+      border: none; border-radius: 14px;
+      padding: 12px 28px;
+      font-weight: 600; font-size: 14px; color: white;
+      cursor: pointer;
       transition: all 0.3s ease;
     }
-    
-    .glass-card:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
+    .glow-btn::after {
+      content: ''; position: absolute; inset: -2px;
+      background: linear-gradient(135deg, #8b5cf6, #f59e0b, #ec4899);
+      border-radius: 16px; z-index: -1;
+      filter: blur(12px); opacity: 0.5;
+      transition: opacity 0.3s;
     }
-    
-    .gradient-text {
-      background: linear-gradient(135deg, #a78bfa 0%, #fbbf24 50%, #f472b6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .glow-btn:hover::after { opacity: 0.8; }
+    .glow-btn:hover { transform: translateY(-2px); }
+
+    /* Shimmer effect */
+    .shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
     }
-    
-    #map {
-      height: 100%;
-      min-height: 500px;
-      border-radius: 1rem;
-      z-index: 1;
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
-    
-    .leaflet-popup-content-wrapper {
-      background: rgba(20, 20, 35, 0.95) !important;
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 12px !important;
-      color: white;
+
+    /* Text gradient */
+    .text-gradient {
+      background: linear-gradient(135deg, #c084fc, #fbbf24, #f472b6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    
-    .leaflet-popup-tip {
-      background: rgba(20, 20, 35, 0.95) !important;
-    }
-    
-    .marker-exotic {
-      background: linear-gradient(135deg, #10b981, #059669);
-      border: 3px solid rgba(255, 255, 255, 0.9);
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-    }
-    
-    .marker-none {
-      background: linear-gradient(135deg, #6b7280, #4b5563);
-      border: 3px solid rgba(255, 255, 255, 0.5);
-      border-radius: 50%;
-      opacity: 0.7;
-    }
-    
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    
-    .animate-pulse-slow {
-      animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-    }
-    
+
+    /* Floating animation */
+    .float { animation: float 6s ease-in-out infinite; }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      50% { transform: translateY(-12px); }
     }
-    
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
+
+    /* Pulse glow */
+    .pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.2); }
+      50% { box-shadow: 0 0 40px rgba(139,92,246,0.4), 0 0 60px rgba(245,158,11,0.15); }
     }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Map */
+    #map { height: 100%; min-height: 550px; border-radius: 20px; z-index: 1; }
+    .leaflet-popup-content-wrapper {
+      background: rgba(19,19,31,0.95) !important; backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 16px !important; color: white;
+    }
+    .leaflet-popup-tip { background: rgba(19,19,31,0.95) !important; }
+
+    /* Marker styles */
+    .marker-exotic { background: linear-gradient(135deg, #10b981, #059669); border: 3px solid rgba(255,255,255,0.9); border-radius: 50%; box-shadow: 0 0 20px rgba(16,185,129,0.5); }
+    .marker-none { background: linear-gradient(135deg, #4b5563, #374151); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; opacity: 0.5; }
+
+    /* Tab pills */
+    .tab-pill {
+      padding: 10px 24px; border-radius: 14px; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: all 0.3s; border: 1px solid transparent;
+      background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5);
+    }
+    .tab-pill.active { background: rgba(139,92,246,0.15); color: #c084fc; border-color: rgba(139,92,246,0.3); }
+    .tab-pill:hover:not(.active) { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); }
+
+    /* Filter select */
+    .magic-select {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 10px 16px; color: white; font-size: 14px;
+      outline: none; cursor: pointer; transition: all 0.3s;
+    }
+    .magic-select:hover, .magic-select:focus { border-color: rgba(139,92,246,0.4); background: rgba(255,255,255,0.06); }
+
+    /* Stats counter animation */
+    .stat-value { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+
+    /* Car image placeholder with gradient */
+    .car-image-bg {
+      background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(245,158,11,0.05), rgba(236,72,153,0.05));
+      position: relative; overflow: hidden;
+    }
+    .car-image-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(139,92,246,0.08) 0%, transparent 60%);
+    }
+
+    /* Loading skeleton */
+    .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.03) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
   </style>
 </head>
 <body>
+  <!-- Background effects -->
+  <div class="mesh-bg"></div>
+  <canvas id="particles"></canvas>
+
   <!-- Header -->
-  <header class="glass-strong fixed top-0 left-0 right-0 z-50 px-4 py-3">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center text-xl font-bold">
-          🏎️
+  <header class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="magic-card px-5 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-amber-500 flex items-center justify-center text-xl float">
+            🏎️
+          </div>
+          <div>
+            <h1 class="text-lg font-bold tracking-tight">Sixt <span class="text-gradient">Exotic</span> Finder</h1>
+            <p class="text-xs text-white/40">Guaranteed supercars worldwide</p>
+          </div>
         </div>
-        <div>
-          <h1 class="text-lg font-bold tracking-tight">Sixt <span class="gradient-text">Exotic</span> Finder</h1>
-          <p class="text-xs text-white/50">Guaranteed supercars worldwide</p>
+        <div class="flex items-center gap-2">
+          <button id="view-map" class="tab-pill active">🗺️ Map</button>
+          <button id="view-list" class="tab-pill">📋 List</button>
         </div>
-      </div>
-      
-      <div class="flex items-center gap-2">
-        <button id="view-map" class="px-4 py-2 rounded-xl text-sm font-medium bg-white/20 hover:bg-white/30 transition-all active">
-          🗺️ Map
-        </button>
-        <button id="view-list" class="px-4 py-2 rounded-xl text-sm font-medium hover:bg-white/10 transition-all text-white/70">
-          📋 List
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Stats Bar -->
-  <div class="pt-20 px-4">
+  <!-- Hero Stats -->
+  <div class="relative z-10 pt-28 px-4">
     <div class="max-w-7xl mx-auto">
-      <div class="glass rounded-2xl p-4 flex flex-wrap gap-4 justify-center items-center">
-        <div class="text-center px-4">
-          <div id="stat-stations" class="text-2xl font-bold text-purple-400">-</div>
-          <div class="text-xs text-white/50 uppercase tracking-wider">Stations</div>
-        </div>
-        <div class="w-px h-8 bg-white/10"></div>
-        <div class="text-center px-4">
-          <div id="stat-exotics" class="text-2xl font-bold text-amber-400">-</div>
-          <div class="text-xs text-white/50 uppercase tracking-wider">With Exotics</div>
-        </div>
-        <div class="w-px h-8 bg-white/10"></div>
-        <div class="text-center px-4">
-          <div id="stat-cars" class="text-2xl font-bold text-emerald-400">-</div>
-          <div class="text-xs text-white/50 uppercase tracking-wider">Supercars</div>
-        </div>
-        <div class="w-px h-8 bg-white/10"></div>
-        <div class="text-center px-4">
-          <div id="stat-guaranteed" class="text-2xl font-bold text-pink-400">-</div>
-          <div class="text-xs text-white/50 uppercase tracking-wider">Guaranteed</div>
-        </div>
-        <div class="w-px h-8 bg-white/10"></div>
-        <div class="text-center px-4">
-          <div id="stat-lastupdate" class="text-sm font-medium text-white/70">-</div>
-          <div class="text-xs text-white/50 uppercase tracking-wider">Last Update</div>
-        </div>
+      <div class="text-center mb-8">
+        <h2 class="text-4xl md:text-5xl font-black mb-3">
+          Find Your Next <span class="text-gradient">Supercar</span>
+        </h2>
+        <p class="text-white/50 text-lg max-w-2xl mx-auto">
+          Discover guaranteed exotic car rentals at Sixt stations around the world. 
+          Plan your trip around the drive of a lifetime.
+        </p>
       </div>
-    </div>
-  </div>
 
-  <!-- Filters -->
-  <div class="px-4 mt-4">
-    <div class="max-w-7xl mx-auto flex flex-wrap gap-2 items-center">
-      <span class="text-sm text-white/50 mr-2">Filter:</span>
-      <select id="filter-country" class="glass rounded-lg px-3 py-2 text-sm text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-purple-500/50">
-        <option value="">All Countries</option>
-      </select>
-      <select id="filter-brand" class="glass rounded-lg px-3 py-2 text-sm text-white bg-transparent focus:outline-none focus:ring-2 focus:ring-purple-500/50">
-        <option value="">All Brands</option>
-      </select>
-      <label class="flex items-center gap-2 glass rounded-lg px-3 py-2 text-sm cursor-pointer hover:bg-white/10 transition-all">
-        <input type="checkbox" id="filter-guaranteed" class="w-4 h-4 rounded accent-purple-500">
-        <span>Guaranteed Only</span>
-      </label>
-      <div class="flex-1"></div>
-      <input type="text" id="search-input" placeholder="Search station or city..." 
-        class="glass rounded-lg px-4 py-2 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 w-full sm:w-64">
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <main class="px-4 py-4 pb-20">
-    <div class="max-w-7xl mx-auto">
-      
-      <!-- Map View -->
-      <div id="map-view" class="h-[calc(100vh-280px)] min-h-[500px]">
-        <div class="glass rounded-2xl h-full p-1">
-          <div id="map"></div>
-        </div>
-      </div>
-      
-      <!-- List View -->
-      <div id="list-view" class="hidden">
-        <div id="stations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Stations injected here -->
-        </div>
-        
-        <div id="cars-section" class="mt-8">
-          <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-            <span class="gradient-text">All Exotic Cars</span>
-            <span id="cars-count" class="text-sm text-white/50 font-normal"></span>
-          </h2>
-          <div id="cars-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- Cars injected here -->
+      <!-- Stats -->
+      <div class="magic-card p-6 mb-6">
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+          <div class="text-center">
+            <div id="stat-stations" class="stat-value text-purple-400">-</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Stations</div>
+          </div>
+          <div class="text-center">
+            <div id="stat-exotics" class="stat-value text-amber-400">-</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">With Exotics</div>
+          </div>
+          <div class="text-center">
+            <div id="stat-cars" class="stat-value text-emerald-400">-</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Supercars</div>
+          </div>
+          <div class="text-center">
+            <div id="stat-guaranteed" class="stat-value text-pink-400">-</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Guaranteed</div>
+          </div>
+          <div class="text-center hidden md:block">
+            <div id="stat-lastupdate" class="text-xl font-bold text-white/70 mt-2">-</div>
+            <div class="text-xs text-white/40 uppercase tracking-widest mt-1">Last Update</div>
           </div>
         </div>
       </div>
-      
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-3 items-center mb-6">
+        <span class="text-sm text-white/40">Filter:</span>
+        <select id="filter-country" class="magic-select">
+          <option value="">All Countries</option>
+        </select>
+        <select id="filter-brand" class="magic-select">
+          <option value="">All Brands</option>
+        </select>
+        <label class="flex items-center gap-2 magic-select cursor-pointer hover:bg-white/8">
+          <input type="checkbox" id="filter-guaranteed" class="w-4 h-4 rounded accent-purple-500">
+          <span class="text-sm">Guaranteed Only</span>
+        </label>
+        <div class="flex-1"></div>
+        <input type="text" id="search-input" placeholder="Search station or city..."
+          class="magic-select w-full sm:w-64">
+      </div>
+
+      <!-- Main Content -->
+      <main class="pb-24">
+        <!-- Map View -->
+        <div id="map-view" class="h-[calc(100vh-380px)] min-h-[500px]">
+          <div class="magic-card h-full p-1">
+            <div id="map"></div>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div id="list-view" class="hidden space-y-8">
+          <!-- Stations Grid -->
+          <div>
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-gradient">Stations with Exotics</span>
+              <span id="stations-count" class="text-sm text-white/40 font-normal"></span>
+            </h3>
+            <div id="stations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Injected -->
+            </div>
+          </div>
+
+          <!-- Cars Grid -->
+          <div>
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-gradient">All Exotic Cars</span>
+              <span id="cars-count" class="text-sm text-white/40 font-normal"></span>
+            </h3>
+            <div id="cars-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <!-- Injected -->
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-  </main>
+  </div>
 
   <!-- Footer -->
-  <footer class="fixed bottom-0 left-0 right-0 glass-strong px-4 py-2 z-50">
-    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs text-white/40">
-      <span>Not affiliated with Sixt SE. Data refreshed weekly.</span>
-      <a href="https://github.com/macmagic-ai/sixt-exotic-finder" target="_blank" class="hover:text-white/70 transition-colors">
-        Open Source on GitHub
-      </a>
+  <footer class="fixed bottom-0 left-0 right-0 z-50 px-4 py-3">
+    <div class="max-w-7xl mx-auto">
+      <div class="magic-card px-5 py-2 flex items-center justify-between text-xs text-white/40">
+        <span>Not affiliated with Sixt SE. Data from sixt.com.</span>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/macmagic-ai/sixt-exotic-finder" target="_blank" class="hover:text-white/70 transition-colors">GitHub</a>
+          <a href="#" id="contribute-link" class="hover:text-purple-400 transition-colors">Contribute Data</a>
+        </div>
+      </div>
     </div>
   </footer>
 
