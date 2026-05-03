@@ -125,8 +125,8 @@
     "lat": 45.6306,
     "lng": 8.7281,
     "slug": "italy/milan/milan-ap-malpensa-t1",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -151,8 +151,8 @@
     "lat": 41.2974,
     "lng": 2.0833,
     "slug": "spain/barcelona/barcelona-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -164,8 +164,8 @@
     "lat": 40.4983,
     "lng": -3.5676,
     "slug": "spain/madrid/madrid-barajas-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -177,8 +177,8 @@
     "lat": 52.3105,
     "lng": 4.7683,
     "slug": "netherlands/amsterdam/amsterdam-schiphol-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 1,
     "lastChecked": "2026-05-03"
   },
   {
@@ -255,8 +255,8 @@
     "lat": 37.6213,
     "lng": -122.379,
     "slug": "usa/san-francisco/san-francisco-airport",
-    "hasExotics": false,
-    "exoticCount": 0,
+    "hasExotics": true,
+    "exoticCount": 2,
     "lastChecked": "2026-05-03"
   }
 ]

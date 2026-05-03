@@ -72,6 +72,78 @@
     "lastSeen": "2026-05-03"
   },
   {
+    "stationId": "AMS01",
+    "stationName": "Amsterdam Schiphol Airport",
+    "model": "BMW M2 Coupe",
+    "brand": "BMW",
+    "category": "Coupe",
+    "guaranteed": true,
+    "price": "$314/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MXP01",
+    "stationName": "Milan Malpensa Airport T1",
+    "model": "BMW 4 Series Gran Coupe",
+    "brand": "BMW",
+    "category": "Gran Coupe",
+    "guaranteed": false,
+    "price": "$180/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "BCN01",
+    "stationName": "Barcelona Airport",
+    "model": "BMW 4 Series Gran Coupe",
+    "brand": "BMW",
+    "category": "Gran Coupe",
+    "guaranteed": false,
+    "price": "$143/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "MAD01",
+    "stationName": "Madrid Barajas Airport",
+    "model": "BMW 4 Series Gran Coupe",
+    "brand": "BMW",
+    "category": "Gran Coupe",
+    "guaranteed": false,
+    "price": "$229/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "SFO01",
+    "stationName": "San Francisco Airport",
+    "model": "BMW 8 Series Coupe",
+    "brand": "BMW",
+    "category": "Coupe",
+    "guaranteed": false,
+    "price": "$204/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
+    "stationId": "SFO01",
+    "stationName": "San Francisco Airport",
+    "model": "Ford Mustang Convertible",
+    "brand": "Ford",
+    "category": "Convertible",
+    "guaranteed": false,
+    "price": "$120/day",
+    "imageUrl": null,
+    "firstSeen": "2026-05-03",
+    "lastSeen": "2026-05-03"
+  },
+  {
     "stationId": "LAX01",
     "stationName": "Los Angeles Airport",
     "model": "Ford Mustang Convertible",
